@@ -46,7 +46,7 @@ export default function Nav({ lang, links, alternateHref }: Props) {
   return (
     <nav aria-label={es ? 'Navegación principal' : 'Main navigation'} className="fixed inset-x-0 top-0 z-50 bg-[var(--primary)] text-[var(--primary-foreground)] border-b-2 border-white/20">
       <div className="max-w-7xl mx-auto px-5 lg:px-10 h-16 flex items-center justify-between gap-3">
-        <a href="#inicio" className="font-display text-2xl tracking-wider shrink-0" aria-label={es ? 'Inicio' : 'Home'}>ODOO<span className="text-[var(--accent)]">.</span>DEV</a>
+        <a href="#inicio" className="font-display text-2xl tracking-wider shrink-0" aria-label={es ? 'deyvids.dev — Inicio' : 'deyvids.dev — Home'}>deyvids<span className="text-[var(--accent)]">.</span>dev</a>
         <ul className="hidden lg:flex items-center gap-5">
           {links.map(link => <li key={link.href}><a className="font-display text-lg hover:text-[var(--accent)] transition-colors" href={link.href}>{link.label}</a></li>)}
         </ul>
