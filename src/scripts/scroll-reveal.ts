@@ -31,27 +31,27 @@ export function setupScrollReveal() {
 
       // Preserve each block's own text opacity, and never leave an invisible fill state.
       const opacity = getComputedStyle(element).opacity;
-      const distance = window.innerWidth < 640 ? 18 : 28;
+      const distance = 8;
       const initialTransform = element.classList.contains('sr-fade')
-        ? 'translate3d(0, 0, 0) scale(0.985)'
+        ? 'translate3d(0, 0, 0)'
         : element.classList.contains('sr-left')
-          ? `translate3d(-${distance}px, 0, 0) scale(0.985)`
-          : `translate3d(0, ${distance}px, 0) scale(0.985)`;
+          ? `translate3d(-${distance}px, 0, 0)`
+          : `translate3d(0, ${distance}px, 0)`;
       try {
         const animation = element.animate([
-          { opacity: 0.06, transform: initialTransform },
-          { opacity, transform: 'translate3d(0, 0, 0) scale(1)' },
+          { opacity: 0, transform: initialTransform },
+          { opacity, transform: 'translate3d(0, 0, 0)' },
         ], {
-          duration: 1250,
-          delay: Math.min(stagger++ * 80, 240),
-          easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
+          duration: 300,
+          delay: Math.min(stagger++ * 50, 150),
+          easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
           fill: 'backwards',
         });
         active.set(element, animation);
         animation.onfinish = animation.oncancel = () => active.delete(element);
       } catch { /* Keep the server-rendered content visible if animation is unavailable. */ }
     }
-  }, { threshold: 0.04, rootMargin: '0px 0px -12% 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -100px 0px' });
 
   // Do not hide or replay content already visible on load, including anchor destinations.
   document.querySelectorAll<HTMLElement>(selector).forEach(element => {
