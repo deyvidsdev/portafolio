@@ -6,6 +6,7 @@ type ProjectText = {
   context: string;
   problem: string;
   solution: string;
+  contribution: string;
 };
 type Project = {
   id: string;
@@ -26,13 +27,15 @@ export const projects: Project[] = [
         name: 'Módulo de Detracciones SUNAT', category: 'Localización peruana',
         context: 'Automatización del registro y validación de detracciones dentro de Odoo.',
         problem: 'El registro manual de detracciones complicaba el seguimiento y la revisión contable.',
-        solution: 'Módulo para calcular y registrar detracciones según los bienes y servicios afectos, integrado con los procesos contables de Odoo.',
+        solution: 'Cálculo y registro de detracciones integrado con los documentos y procesos contables de Odoo.',
+        contribution: 'Desarrollo de la lógica de cálculo, registro y validación dentro del módulo.',
       },
       en: {
         name: 'SUNAT Detraction Module', category: 'Peruvian localization',
         context: 'Automating the recording and validation of detractions in Odoo.',
         problem: 'Manual detraction entries complicated tracking and accounting review.',
-        solution: 'A module to calculate and record detractions for applicable goods and services, integrated with Odoo accounting processes.',
+        solution: 'Detraction calculation and recording integrated with Odoo accounting documents and workflows.',
+        contribution: 'Development of calculation, recording and validation logic within the module.',
       },
     },
   },
@@ -44,13 +47,15 @@ export const projects: Project[] = [
         name: 'Facturación Electrónica OSE', category: 'Facturación electrónica',
         context: 'Integración de documentos electrónicos y seguimiento de respuestas del proveedor de emisión.',
         problem: 'Los tiempos de espera y los documentos sin respuesta dificultaban el control de la emisión electrónica.',
-        solution: 'Refactorización del conector con colas y reintentos, y gestión de documentos electrónicos UBL 2.1.',
+        solution: 'Adaptación del conector para gestionar documentos electrónicos UBL 2.1 y revisar las respuestas del servicio.',
+        contribution: 'Trabajo en el conector y en el seguimiento de respuestas de la emisión electrónica.',
       },
       en: {
         name: 'OSE Electronic Invoicing', category: 'Electronic invoicing',
         context: 'Electronic document integration and tracking of responses from the invoicing provider.',
         problem: 'Timeouts and documents without a response made electronic invoicing harder to monitor.',
-        solution: 'Connector refactoring with queues, retries and UBL 2.1 electronic document handling.',
+        solution: 'Connector adaptation to handle UBL 2.1 electronic documents and review service responses.',
+        contribution: 'Work on the connector and electronic invoicing response tracking.',
       },
     },
   },
@@ -60,15 +65,17 @@ export const projects: Project[] = [
     content: {
       es: {
         name: 'Dashboard de Tesorería OWL', category: 'Tesorería',
-        context: 'Una interfaz para consultar cuentas bancarias, flujo de caja y conciliación pendiente.',
+        context: 'Una interfaz para consultar saldos bancarios y operaciones pendientes de conciliación.',
         problem: 'El equipo financiero necesitaba consultar la información de varias cuentas desde una misma vista.',
-        solution: 'Dashboard desarrollado con OWL para visualizar saldos por cuenta, proyecciones de flujo y operaciones pendientes de conciliación.',
+        solution: 'Panel OWL que reúne saldos por cuenta y operaciones pendientes de conciliación para facilitar su consulta.',
+        contribution: 'Desarrollo de la interfaz de consulta de información de tesorería con OWL.',
       },
       en: {
         name: 'OWL Treasury Dashboard', category: 'Treasury',
-        context: 'An interface for bank accounts, cash flow and pending reconciliation.',
+        context: 'An interface for reviewing bank balances and transactions awaiting reconciliation.',
         problem: 'The finance team needed to review information from multiple accounts in one view.',
-        solution: 'An OWL dashboard displaying account balances, cash flow projections and transactions awaiting reconciliation.',
+        solution: 'An OWL dashboard bringing together account balances and transactions awaiting reconciliation.',
+        contribution: 'Development of the treasury information interface with OWL.',
       },
     },
   },
@@ -80,13 +87,15 @@ export const projects: Project[] = [
         name: 'Migración de Módulos v17 → v19', category: 'Migración',
         context: 'Adaptación de módulos personalizados a Odoo 19 Enterprise.',
         problem: 'Los cambios de APIs, vistas y componentes entre versiones requerían revisar el código y sus dependencias.',
-        solution: 'Análisis de compatibilidad y adaptación de modelos Python, vistas y componentes OWL para la nueva versión.',
+        solution: 'Adaptación de modelos Python, vistas y componentes OWL para la nueva versión, con revisión de las dependencias del código.',
+        contribution: 'Análisis de compatibilidad y adaptación de módulos personalizados. El alcance descrito corresponde al código.',
       },
       en: {
         name: 'Module Migration v17 → v19', category: 'Migration',
         context: 'Adapting custom modules to Odoo 19 Enterprise.',
         problem: 'Changes to APIs, views and components across versions required a review of the code and its dependencies.',
-        solution: 'Compatibility analysis and adaptation of Python models, views and OWL components for the new version.',
+        solution: 'Adaptation of Python models, views and OWL components for the new version, with a review of code dependencies.',
+        contribution: 'Compatibility analysis and custom module adaptation. The scope described here covers code changes.',
       },
     },
   },

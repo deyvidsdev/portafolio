@@ -8,8 +8,8 @@ const featured = projects.find(project => project.featured)!;
 const featuredText = featured.content[lang];
 const rest = projects.filter(project => project.id !== featured.id);
 const labels = es
-  ? { problem: 'Problema', solution: 'Solución técnica', stack: 'Tecnologías', open: 'Ver detalle', close: 'Cerrar detalle' }
-  : { problem: 'Problem', solution: 'Technical solution', stack: 'Technologies', open: 'View details', close: 'Close details' };
+  ? { problem: 'Problema', solution: 'Solución técnica', contribution: 'Mi aporte', stack: 'Tecnologías', open: 'Ver detalle', close: 'Cerrar detalle' }
+  : { problem: 'Problem', solution: 'Technical solution', contribution: 'My contribution', stack: 'Technologies', open: 'View details', close: 'Close details' };
 ---
 <section id="proyectos" class="py-20 lg:py-28 bg-[var(--primary)] text-[var(--primary-foreground)]" aria-labelledby="projects-heading">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
@@ -34,7 +34,7 @@ const labels = es
         </ul>
       </div>
       <dl class="p-6 sm:p-8 lg:p-10 space-y-6">
-        {[{ label: labels.problem, value: featuredText.problem }, { label: labels.solution, value: featuredText.solution }].map(field => (
+        {[{ label: labels.problem, value: featuredText.problem }, { label: labels.solution, value: featuredText.solution }, { label: labels.contribution, value: featuredText.contribution }].map(field => (
           <div><dt class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--muted-foreground)]">{field.label}</dt><dd class="font-sans text-sm leading-relaxed">{field.value}</dd></div>
         ))}
       </dl>
@@ -59,6 +59,7 @@ const labels = es
                 <dl class="space-y-5">
                   <div><dt class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--muted-foreground)]">{labels.problem}</dt><dd class="font-sans text-sm leading-relaxed">{text.problem}</dd></div>
                   <div><dt class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--muted-foreground)]">{labels.solution}</dt><dd class="font-sans text-sm leading-relaxed">{text.solution}</dd></div>
+                  <div><dt class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--muted-foreground)]">{labels.contribution}</dt><dd class="font-sans text-sm leading-relaxed">{text.contribution}</dd></div>
                 </dl>
                 <ul aria-label={labels.stack} class="flex flex-wrap gap-2">
                   {project.stack.map(tech => <li class="font-mono text-xs border border-[var(--border)] px-2 py-1">{tech}</li>)}

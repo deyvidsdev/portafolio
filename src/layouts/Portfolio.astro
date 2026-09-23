@@ -23,7 +23,7 @@ const spanishPath = base;
 const englishPath = base + 'en/';
 const path = lang === 'es' ? spanishPath : englishPath;
 const title = lang === 'es' ? 'Deyvids Alvino | Desarrollador Odoo & OWL' : 'Deyvids Alvino | Odoo & OWL Developer';
-const description = lang === 'es' ? 'Desarrollo Odoo 16–19, frontend OWL, localización peruana, integraciones y migraciones. Conoce mi enfoque técnico y mi trabajo.' : 'Odoo 16–19 development, OWL interfaces, Peruvian localization, integrations and migrations. Explore my work and technical approach.';
+const description = lang === 'es' ? 'Desarrollo Odoo para contabilidad, tesorería y localización peruana. Python, OWL, integraciones y adaptación de módulos entre versiones.' : 'Odoo development for accounting, treasury and Peruvian localization. Python, OWL, integrations and module adaptations across versions.';
 const canonical = Astro.site ? new URL(path, Astro.site).href : undefined;
 const structuredData = { '@context': 'https://schema.org', '@type': 'Person', name: profile.name, jobTitle: 'Odoo & OWL Developer', sameAs: [profile.github, profile.linkedin], ...(canonical ? { url: canonical } : {}) };
 ---

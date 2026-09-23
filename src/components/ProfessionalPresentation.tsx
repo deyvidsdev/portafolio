@@ -19,9 +19,7 @@ export default function ProfessionalPresentation({ content, lang }: Props) {
               </h2>
               <div className="flex items-center">
                 <p className="text-base text-[var(--muted-foreground)] leading-relaxed sr" style={{ transitionDelay: '120ms' }}>
-                  {lang === 'es'
-                    ? 'No ejecuto tickets: analizo el proceso, identifico la causa raíz y construyo soluciones que el equipo técnico puede mantener y el usuario final puede usar.'
-                    : "I don't execute tickets: I analyze the process, identify the root cause and build solutions the technical team can maintain and the end user can operate."}
+                  {p.intro}
                 </p>
               </div>
             </div>

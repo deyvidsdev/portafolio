@@ -7,9 +7,9 @@ const stackGroupsEs = [
     id: 'backend', label: 'Backend', icon: '{}',
     items: [
       { name: 'Python', note: 'Lógica de negocio, ORM, controladores' },
-      { name: 'Odoo ORM', note: 'Modelos, constrains, compute fields' },
-      { name: 'PostgreSQL', note: 'Queries, índices, diagnóstico' },
-      { name: 'REST API', note: 'Integraciones, JSON-RPC, XML-RPC' },
+      { name: 'Odoo ORM', note: 'Modelos, validaciones y campos calculados' },
+      { name: 'PostgreSQL', note: 'Consultas, índices y diagnóstico' },
+      { name: 'APIs e integraciones', note: 'REST, JSON-RPC y XML-RPC' },
     ],
   },
   {
@@ -25,15 +25,16 @@ const stackGroupsEs = [
     id: 'infra', label: 'Infraestructura', icon: '◻',
     items: [
       { name: 'Docker', note: 'Contenedores, Compose, entornos' },
-      { name: 'Linux', note: 'Ubuntu, Debian, shell scripting' },
+      { name: 'Odoo.sh', note: 'Ramas y entornos de pruebas' },
+      { name: 'Linux', note: 'Servidores, configuración y scripts' },
       { name: 'Nginx', note: 'Proxy inverso, SSL, rutas' },
-      { name: 'Git', note: 'Branches, tags, flujos de trabajo' },
+      { name: 'Git', note: 'Ramas, revisiones y control de versiones' },
     ],
   },
   {
     id: 'fiscal', label: 'Localización PE', icon: '✦',
     items: [
-      { name: 'SUNAT API', note: 'Consulta RUC, validaciones' },
+      { name: 'SIRE / PLE', note: 'Registros y reportes contables' },
       { name: 'PSE / OSE', note: 'Facturación electrónica UBL 2.1' },
       { name: 'Detracciones', note: 'Bienes y servicios afectos' },
       { name: 'l10n_pe', note: 'Módulo oficial + extensiones' },
@@ -46,7 +47,7 @@ const stackGroupsEn = [
     { name: 'Python', note: 'Business logic, ORM, controllers' },
     { name: 'Odoo ORM', note: 'Models, constraints, compute fields' },
     { name: 'PostgreSQL', note: 'Queries, indexes, diagnostics' },
-    { name: 'REST API', note: 'Integrations, JSON-RPC, XML-RPC' },
+    { name: 'APIs & integrations', note: 'REST, JSON-RPC and XML-RPC' },
   ]},
   { id: 'frontend', label: 'Frontend', icon: '⬡', items: [
     { name: 'OWL', note: 'Reactive components, services, hooks' },
@@ -56,14 +57,15 @@ const stackGroupsEn = [
   ]},
   { id: 'infra', label: 'Infrastructure', icon: '◻', items: [
     { name: 'Docker', note: 'Containers, Compose, environments' },
-    { name: 'Linux', note: 'Ubuntu, Debian, shell scripting' },
+    { name: 'Odoo.sh', note: 'Branches and testing environments' },
+    { name: 'Linux', note: 'Servers, configuration and scripts' },
     { name: 'Nginx', note: 'Reverse proxy, SSL, routes' },
     { name: 'Git', note: 'Branches, tags, workflows' },
   ]},
   { id: 'fiscal', label: 'Peruvian Loc.', icon: '✦', items: [
-    { name: 'SUNAT API', note: 'RUC lookup, validations' },
+    { name: 'SIRE / PLE', note: 'Peruvian accounting records and reports' },
     { name: 'PSE / OSE', note: 'Electronic invoicing UBL 2.1' },
-    { name: 'Detraction', note: 'Goods and services affected' },
+    { name: 'Detracciones', note: 'Peruvian tax payment workflows' },
     { name: 'l10n_pe', note: 'Official module + extensions' },
   ]},
 ]
@@ -113,7 +115,7 @@ export default function Stack({ content, lang }: Props) {
         {/* Tools strip */}
         <div className="mt-6 border-2 border-[var(--foreground)] p-5 flex flex-wrap gap-x-6 gap-y-2 items-center sr" style={{ transitionDelay: '450ms' }}>
           <span className="font-mono text-[10px] text-[var(--muted-foreground)] tracking-widest uppercase shrink-0">{lang === 'es' ? 'También uso:' : 'Also use:'}</span>
-          {['VS Code', 'pgAdmin', 'Postman', 'OpenUpgrade', 'GitHub Actions', 'Figma', 'Notion'].map((t) => (
+          {['VS Code', 'pgAdmin', 'Postman', 'GitHub Actions', 'Figma', 'Obsidian'].map((t) => (
             <span key={t} className="font-sans text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors cursor-default">{t}</span>
           ))}
         </div>
