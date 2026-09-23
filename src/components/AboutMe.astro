@@ -2,20 +2,52 @@
 import { profile } from '../data/profile';
 import type { translations, Lang } from '../data/translations';
 const { content } = Astro.props as { content: (typeof translations)[Lang]['about']; lang: Lang };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
 ---
 <section id="sobre-mi" class="py-20 lg:py-28 bg-[var(--background)] parchment" aria-labelledby="about-heading">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-[.7fr_1.3fr] gap-12 lg:gap-20">
-    <div class="border-l-4 border-[var(--accent)] pl-6 self-start">
-      <p class="font-display text-4xl mb-3">{profile.name}</p>
-      <p class="font-mono text-sm text-[var(--muted-foreground)]">Odoo · Python · OWL</p>
-      <a class="inline-block mt-6 font-mono text-sm underline underline-offset-4" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="relative mb-12">
+      <div class="absolute -top-4 left-0 chapter-num" aria-hidden="true">VIII</div>
+      <p class="relative font-mono text-xs text-[var(--accent)] uppercase tracking-widest">{content.chapter} · {content.sectionLabel}</p>
     </div>
-    <div>
-      <h2 id="about-heading" class="font-display text-4xl sm:text-5xl mb-8">{content.heading1} <span class="text-[var(--accent)]">{content.heading2}</span></h2>
-      <div class="space-y-5 text-[var(--muted-foreground)] leading-relaxed font-sans"><p>{content.bio1}</p><p>{content.bio2}</p></div>
-      <dl class="mt-8 grid sm:grid-cols-3 gap-6">
-        {content.values.map(value => <div><dt class="font-display text-2xl mb-2">{value.label}</dt><dd class="text-sm text-[var(--muted-foreground)] leading-relaxed">{value.desc}</dd></div>)}
-      </dl>
+    <div class="grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-start">
+      <figure class="manga-panel bg-[var(--card)] overflow-hidden w-full max-w-md mx-auto lg:mx-0">
+        <div class="bg-[var(--primary)] px-5 py-3 flex items-center justify-between gap-3">
+          <span class="font-display text-lg text-[var(--primary-foreground)] tracking-wide">{content.cardTitle}</span>
+          <span class="font-mono text-xs text-[var(--primary-foreground)]">#001</span>
+        </div>
+        <div class="aspect-[3/4] bg-[var(--muted)] relative">
+          {profile.photoPath ? (
+            <img src={base + profile.photoPath} alt={content.photoAlt} width="600" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+          ) : (
+            <div class="h-full flex flex-col items-center justify-center gap-4 p-8 text-center">
+              <div class="absolute inset-4 border border-dashed border-[var(--border)] pointer-events-none" aria-hidden="true"></div>
+              <!-- Placeholder icon preserved from the Figma export. -->
+              <svg width="72" height="72" viewBox="0 0 64 64" fill="none" aria-hidden="true" class="text-[var(--muted-foreground)]">
+                <circle cx="32" cy="24" r="12" stroke="currentColor" stroke-width="1.5" />
+                <path d="M8 58c0-13.3 10.7-24 24-24s24 10.7 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <p class="font-mono text-sm max-w-[24ch] text-[var(--muted-foreground)]">{content.photoPending}</p>
+              <span class="font-mono text-xs text-[var(--muted-foreground)]" aria-hidden="true">⟨ IMG ⟩</span>
+              <div class="absolute bottom-5 right-5 border-2 border-dashed border-[var(--accent)] px-3 py-2 rotate-[-8deg]" aria-hidden="true">
+                <p class="font-display text-lg text-[var(--accent)]">ODOO</p>
+                <p class="font-display text-xs text-[var(--accent)]">DEV·PE</p>
+              </div>
+            </div>
+          )}
+        </div>
+        <figcaption class="border-t-2 border-[var(--border)] px-5 py-5">
+          <p class="font-display text-3xl mb-2">{profile.name}</p>
+          <p class="font-mono text-xs text-[var(--muted-foreground)]">Odoo 16–19 · Python · OWL</p>
+        </figcaption>
+      </figure>
+      <div>
+        <h2 id="about-heading" class="font-display text-4xl sm:text-5xl xl:text-6xl mb-8">{content.heading1} <span class="text-[var(--accent)]">{content.heading2}</span></h2>
+        <div class="space-y-5 text-[var(--muted-foreground)] leading-relaxed font-sans"><p>{content.bio1}</p><p>{content.bio2}</p><p>{content.bio3}</p></div>
+        <dl class="mt-10 grid sm:grid-cols-3 border-2 border-[var(--border)]">
+          {content.values.map(value => <div class="p-5 border-b-2 sm:border-b-0 sm:border-r-2 last:border-0 border-[var(--border)]"><dt class="font-display text-2xl mb-2"><span class="block text-[var(--accent)] font-mono text-xl mb-2" aria-hidden="true">{value.icon}</span>{value.label}</dt><dd class="text-sm text-[var(--muted-foreground)] leading-relaxed">{value.desc}</dd></div>)}
+        </dl>
+      </div>
     </div>
   </div>
 </section>

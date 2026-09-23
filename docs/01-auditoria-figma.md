@@ -14,3 +14,7 @@ Fuente: `User dashboard.zip`, exportación de Figma Make del 22/09/2026. El ZIP 
 - Astro genera HTML en español e inglés. Solo navegación, especialidades y metodología se hidratan con React; el contenido permanece legible sin JavaScript.
 
 Lectura visual: evolución del boceto, variación 6, movimiento 3 y densidad 4. No se cambia a un template ni se añaden fotografías ficticias.
+
+## Corrección de fidelidad al boceto
+
+A petición del propietario, se restauraron las tarjetas de proyectos, el panel de fotografía pendiente y el contacto con sus enlaces, CV pendiente y formulario. El ZIP no contiene una fotografía ni un PDF de CV. Los controles pendientes se conservan visualmente; no deben eliminarse al migrar el diseño. El formulario ya no simula entrega: prepara un correo para enviarlo desde el cliente del visitante.

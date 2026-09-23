@@ -41,13 +41,14 @@ Vite 7.3.6 se fija explícitamente porque Astro 6 usa Vite 7; permitir Vite 8 a 
 
 ## Editar el contenido
 
-- Perfil y enlaces: `src/data/profile.ts`.
+- Perfil, enlaces, fotografía y CV: `src/data/profile.ts`.
+- Formulario: `src/components/Contact.astro`; construcción del borrador en `src/lib/contact.ts`.
 - Texto de las secciones: `src/data/translations.ts`.
 - Proyectos y sus detalles: `src/data/projects.ts`; presentación en `src/components/Projects.astro`.
 - Colores, fuentes y estilos: `src/index.css`.
 - SEO: `src/layouts/Portfolio.astro`.
 
-Se recuperaron los cuatro proyectos del boceto a petición del propietario, con una ficha destacada y tres tarjetas desplegables. Las métricas, los estados de producción no confirmados y los artículos ficticios del ZIP se retiraron. El contacto enlaza a LinkedIn y GitHub; no hay un formulario que simule envíos. No se publica un correo ni CV hasta confirmar los datos. Las fuentes se incluyen localmente con Fontsource.
+Se recuperaron los cuatro proyectos del boceto a petición del propietario, con una ficha destacada y tres tarjetas desplegables. Las métricas, los estados de producción no confirmados y los artículos ficticios del ZIP se retiraron. El contacto recupera el correo y las cinco vías de contacto del ZIP. El formulario valida los datos y genera un borrador `mailto:`; el visitante lo revisa y envía desde su aplicación de correo. No hay un servicio de envío directo ni una confirmación ficticia. La tarjeta de fotografía y el CV conservan sus estados pendientes. Las fuentes se incluyen localmente con Fontsource.
 
 ## Hosting
 
@@ -65,8 +66,8 @@ Para un dominio propio utiliza su URL en `SITE_URL` y `BASE_PATH=/`. La URL can�
 ## Siguientes contenidos
 
 1. Revisar el texto de los proyectos restaurados y añadir resultados y estados solo cuando estén confirmados.
-2. Confirmar si se publicarán correo, fotografía y CV.
+2. Incorporar la fotografía y el PDF del CV reales; configurar `photoPath` y `cvPath` en `src/data/profile.ts` con rutas relativas a `public/`.
 3. Redactar casos o artículos antes de habilitar una bitácora.
-4. Elegir dominio y hosting para publicar.
+4. Elegir dominio y hosting para publicar. Si se necesita envío directo desde la web, conectar un servicio de correo y validar su entrega.
 
 Consulta `docs/01-auditoria-figma.md` y `docs/02-validacion.md` para el alcance de la adaptación y sus comprobaciones.

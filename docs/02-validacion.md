@@ -26,3 +26,14 @@ Alcance: estas comprobaciones no equivalen a una auditoría WCAG completa, métr
 - Contenido español/inglés centralizado en `src/data/projects.ts`. No se reincorporan métricas ni estados de entrega sin confirmar.
 - `npm run check`: 0 errores, advertencias o sugerencias. `npm run build`: ambas rutas generadas.
 - Navegador: cuatro fichas presentes; apertura con ratón y cierre con Enter; vista de 390 px sin desbordamiento; nombres de los cuatro proyectos traducidos; sin errores de consola.
+
+## Restauración de perfil y contacto
+
+- Panel de fotografía 3:4, ficha de expedición y marcador de foto pendiente recuperados del ZIP. No se incluye un retrato ficticio ni una imagen rota.
+- Restituidos correo, LinkedIn, GitHub, Instagram, TikTok, CV pendiente y formulario con los campos originales.
+- El ZIP contiene el correo de contacto, pero no una fotografía ni un PDF de CV. `photoPath` y `cvPath` permiten incorporarlos posteriormente desde `public/`.
+- El formulario prepara un enlace de borrador; no envía desde un servidor ni afirma que un mensaje fue entregado. El enlace se invalida al editar los campos.
+- `npm run check`: sin errores, advertencias o sugerencias. `npm run build`: español e inglés generados.
+- Navegador: rechazo de campos vacíos y correo inválido; borrador correcto con datos válidos; foco sobre la acción de abrir el correo; borrador invalidado tras editar. No se abrió el cliente de correo ni se envió ningún mensaje.
+- Prueba aislada de codificación: Unicode, ampersands, saltos de línea, asunto vacío y ausencia de parámetros adicionales derivados del cuerpo.
+- Perfil/contacto inspeccionados en escritorio y móvil de 390 px, temas claro y oscuro. Sin desbordamiento; etiquetas inglesas y pendientes traducidos; sin errores de consola.

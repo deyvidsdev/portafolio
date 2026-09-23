@@ -1,16 +1,65 @@
 ---
 import { profile } from '../data/profile';
+import { contactIcons } from '../data/contact-icons';
 import type { translations, Lang } from '../data/translations';
-const { content, lang } = Astro.props as { content: (typeof translations)[Lang]['contact']; lang: Lang };
+const { content: c, lang } = Astro.props as { content: (typeof translations)[Lang]['contact']; lang: Lang };
 const es = lang === 'es';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+const links = [
+  { icon: 'email', label: es ? 'Correo' : 'Email', value: profile.email, href: `mailto:${profile.email}` },
+  { icon: 'linkedin', label: 'LinkedIn', value: '/in/deyvids-ramces', href: profile.linkedin },
+  { icon: 'github', label: 'GitHub', value: 'github.com/deyvidsdev', href: profile.github },
+  { icon: 'instagram', label: 'Instagram', value: '@user.deyy', href: profile.instagram },
+  { icon: 'tiktok', label: 'TikTok', value: '@deyvids.dev', href: profile.tiktok },
+] as const;
 ---
 <section id="contacto" class="py-20 lg:py-28 bg-[var(--primary)] text-[var(--primary-foreground)]" aria-labelledby="contact-heading">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <h2 id="contact-heading" class="font-display text-5xl xl:text-6xl max-w-3xl mb-7">{content.heading1} <span class="text-[var(--accent)]">{content.heading2}</span></h2>
-    <p class="font-sans max-w-xl leading-relaxed mb-9">{content.desc}</p>
-    <div class="flex flex-wrap gap-4">
-      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="bg-[var(--accent)] text-white border-2 border-white px-7 py-3 font-display text-xl hover:bg-white hover:text-[var(--primary)] transition-colors">{es ? 'CONVERSEMOS EN LINKEDIN ↗' : 'LET’S CONNECT ON LINKEDIN ↗'}</a>
-      <a href={profile.github} target="_blank" rel="noopener noreferrer" class="border-2 border-white px-7 py-3 font-display text-xl hover:bg-white hover:text-[var(--primary)] transition-colors">GITHUB ↗</a>
+    <div class="relative mb-12 lg:mb-16">
+      <div class="absolute -top-4 left-0 chapter-num text-white/10" aria-hidden="true">IX</div>
+      <div class="relative">
+        <p class="font-mono text-xs uppercase tracking-widest text-[var(--accent)] mb-4">{c.chapter} · {c.sectionLabel}</p>
+        <h2 id="contact-heading" class="font-display text-5xl xl:text-6xl max-w-4xl">{c.heading1} <span class="text-[var(--accent)]">{c.heading2}</span></h2>
+      </div>
+    </div>
+    <div class="grid lg:grid-cols-[1fr_1.4fr] gap-10 items-start">
+      <div>
+        <p class="font-sans leading-relaxed mb-9">{c.desc}</p>
+        <ul class="space-y-5">
+          {links.map(link => <li><a href={link.href} target={link.href.startsWith('https:') ? '_blank' : undefined} rel="noopener noreferrer" class="flex items-center gap-4 group" aria-label={`${link.label}: ${link.value}`}>
+            <span class="w-11 h-11 shrink-0 flex items-center justify-center border-2 border-white/40 group-hover:bg-[var(--accent)] transition-colors" aria-hidden="true" set:html={contactIcons[link.icon]} />
+            <span class="min-w-0"><span class="block font-mono text-xs mb-1">{link.label}</span><span class="block font-sans text-sm break-words underline-offset-4 group-hover:underline">{link.value}</span></span>
+          </a></li>)}
+        </ul>
+        <div class="mt-10 pt-8 border-t-2 border-white/20">
+          {profile.cvPath ? (
+            <a href={base + profile.cvPath} download class="inline-flex px-6 py-3 border-2 border-white/60 font-display text-xl">{c.cvBtn}</a>
+          ) : (
+            <div><button disabled aria-describedby="cv-status" class="inline-flex px-6 py-3 border-2 border-white/30 text-white/60 font-display text-xl cursor-not-allowed">{c.cvBtn}</button><p id="cv-status" class="font-mono text-xs mt-3">{c.cvSoon}</p></div>
+          )}
+        </div>
+      </div>
+      <div class="border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)] overflow-hidden">
+        <h3 class="bg-[var(--accent)] text-[var(--accent-foreground)] px-6 py-3 font-display text-2xl">{c.formTitle}</h3>
+        <form id="contact-form" data-recipient={profile.email} class="p-6 flex flex-col gap-5" aria-describedby="contact-help contact-required">
+          <p id="contact-help" class="text-sm leading-relaxed text-[var(--muted-foreground)]">{c.formHelp}</p>
+          <p id="contact-required" class="font-mono text-xs text-[var(--muted-foreground)]">{c.requiredHint}</p>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="field"><label for="c-name">{c.fields.name} *</label><input id="c-name" name="name" type="text" autocomplete="name" required maxlength="120" placeholder={c.placeholders.name} /></div>
+            <div class="field"><label for="c-email">{c.fields.email} *</label><input id="c-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder={c.placeholders.email} /></div>
+          </div>
+          <div class="field"><label for="c-subject">{c.fields.subject}</label><input id="c-subject" name="subject" type="text" maxlength="180" placeholder={c.placeholders.subject} /></div>
+          <div class="field"><label for="c-message">{c.fields.message} *</label><textarea id="c-message" name="message" rows="5" required maxlength="4000" placeholder={c.placeholders.message}></textarea></div>
+          <button id="prepare-email" type="submit" disabled class="self-start px-6 py-3 border-2 border-[var(--border)] bg-[var(--accent)] text-[var(--accent-foreground)] font-display text-xl disabled:opacity-50 hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-colors">{c.submit}</button>
+          <p id="draft-status" role="status" aria-live="polite" class="text-sm leading-relaxed"></p>
+          <div id="draft-actions" hidden>
+            <a id="email-draft" class="inline-block border-2 border-[var(--border)] px-5 py-3 font-display text-xl">{c.openDraft}</a>
+            <p class="text-sm text-[var(--muted-foreground)] leading-relaxed mt-4">{c.fallback} <a href={`mailto:${profile.email}`} class="underline break-all">{profile.email}</a>.</p>
+          </div>
+          <span id="draft-ready-text" hidden>{c.draftReady}</span>
+          <noscript><p class="text-sm">{c.noScript} <a href={`mailto:${profile.email}`} class="underline">{profile.email}</a></p></noscript>
+        </form>
+      </div>
     </div>
     <footer class="mt-16 pt-8 border-t border-white/30 flex flex-wrap justify-between gap-4 text-sm font-mono">
       <p>© {new Date().getFullYear()} · {profile.name}</p>
@@ -18,3 +67,38 @@ const es = lang === 'es';
     </footer>
   </div>
 </section>
+<style>
+  .field { display:flex; flex-direction:column; gap:.5rem; min-width:0; }
+  .field label { font-family:var(--font-mono); font-size:.75rem; color:var(--muted-foreground); }
+  .field input, .field textarea { width:100%; min-width:0; padding:.75rem 1rem; background:var(--card); color:var(--foreground); border:2px solid var(--border); font-size:.875rem; }
+  .field textarea { resize:vertical; min-height:9rem; }
+  .field input::placeholder, .field textarea::placeholder { color:var(--muted-foreground); opacity:1; }
+  #draft-status:empty { display:none; }
+</style>
+<script>
+  import { createMailtoDraft } from '../lib/contact';
+  const form = document.querySelector<HTMLFormElement>('#contact-form');
+  const submit = document.querySelector<HTMLButtonElement>('#prepare-email');
+  const draft = document.querySelector<HTMLAnchorElement>('#email-draft');
+  const actions = document.querySelector<HTMLElement>('#draft-actions');
+  const status = document.querySelector<HTMLElement>('#draft-status');
+  if (form && submit && draft && actions && status) {
+    const clearDraft = () => { actions.hidden = true; draft.removeAttribute('href'); status.textContent = ''; };
+    form.addEventListener('input', clearDraft);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const values = new FormData(form);
+      draft.href = createMailtoDraft(form.dataset.recipient!, {
+        name: String(values.get('name') || ''),
+        email: String(values.get('email') || ''),
+        subject: String(values.get('subject') || ''),
+        message: String(values.get('message') || ''),
+      });
+      actions.hidden = false;
+      status.textContent = document.querySelector('#draft-ready-text')?.textContent || '';
+      draft.focus();
+    });
+    submit.disabled = false;
+  }
+</script>
