@@ -6,6 +6,7 @@ import '@fontsource/jetbrains-mono/latin-400.css';
 import '../index.css';
 import Nav from '../components/Nav';
 import Hero from '../components/Hero';
+import NavigationChart from '../components/NavigationChart';
 import ProfessionalPresentation from '../components/ProfessionalPresentation';
 import Specialties from '../components/Specialties';
 import Projects from '../components/Projects.astro';
@@ -58,7 +59,9 @@ const structuredData = { '@context': 'https://schema.org', '@type': 'Person', na
     <a class="skip-link" href="#main-content">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
     <Nav lang={lang} links={tr.nav.links} alternateHref={lang === 'es' ? englishPath : spanishPath} client:load />
     <main id="main-content" tabindex="-1">
-      <Hero content={tr.hero} lang={lang} />
+      <Hero content={tr.hero} lang={lang}>
+        <NavigationChart lang={lang} client:load />
+      </Hero>
       <ProfessionalPresentation content={tr.presentation} lang={lang} />
       <Specialties content={tr.specialties} lang={lang} client:load />
       <Projects lang={lang} />
