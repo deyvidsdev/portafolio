@@ -7,6 +7,8 @@ type Props = {
   alternateHref: string;
 };
 
+const brandName = 'deyvids.dev';
+
 export default function Nav({ lang, links, alternateHref }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
@@ -68,34 +70,59 @@ export default function Nav({ lang, links, alternateHref }: Props) {
 
     void import('animejs').then(({ createTimeline, stagger }) => {
       if (!active) return;
+      const letters = root.querySelectorAll<HTMLElement>('.brand-letter');
       const hat = root.querySelector<HTMLElement>('.brand-straw-hat');
       const aura = root.querySelectorAll<HTMLElement>('.brand-aura__ring');
-      if (!hat || !aura.length) return;
+      const hakiBolts = root.querySelectorAll<HTMLElement>('.brand-haki__bolt');
+      if (!letters.length || !hat || !aura.length || !hakiBolts.length) return;
 
       timeline = createTimeline()
+        .add(letters, {
+          opacity: [0, 1],
+          y: [10, 0],
+          scaleX: [.62, 1.08],
+          scaleY: [1.55, .9],
+          duration: 390,
+          delay: stagger(32),
+          ease: 'out(4)',
+        }, 0)
+        .add(letters, {
+          scaleX: 1,
+          scaleY: 1,
+          duration: 430,
+          delay: stagger(22),
+          ease: 'outElastic(.85, .55)',
+        }, 230)
         .add(hat, {
           opacity: [0, 1],
-          y: [-14, 0],
+          y: [-18, 0],
           scaleX: [.5, 1.16],
           scaleY: [1.75, .86],
           rotate: [-14, 0],
           duration: 520,
           ease: 'out(4)',
-        }, 0)
+        }, 80)
         .add(hat, {
           scaleX: 1,
           scaleY: 1,
           duration: 560,
           ease: 'outElastic(.9, .45)',
-        }, 300)
+        }, 370)
         .add(aura, {
-          opacity: [0, .78, 0],
-          scale: [.35, 1.65],
-          rotate: [0, 145],
-          duration: 760,
+          opacity: [0, .92, 0],
+          scale: [.25, 1.9],
+          rotate: [0, 165],
+          duration: 680,
           delay: stagger(65),
           ease: 'outExpo',
-        }, 70);
+        }, 400)
+        .add(hakiBolts, {
+          opacity: [0, 1, 0],
+          scaleX: [0, 1.15],
+          duration: 460,
+          delay: stagger(38),
+          ease: 'outExpo',
+        }, 430);
     });
 
     return () => {
@@ -121,21 +148,35 @@ export default function Nav({ lang, links, alternateHref }: Props) {
           aria-label={es ? 'deyvids.dev - Inicio' : 'deyvids.dev - Home'}
         >
           <span className="brand-wordmark" aria-hidden="true">
-            <span className="brand-initial">
-              d
-              <span className="brand-aura">
-                <span className="brand-aura__ring brand-aura__ring--outer" />
-                <span className="brand-aura__ring brand-aura__ring--inner" />
+            {[...brandName].map((character, index) => (
+              <span
+                key={`${character}-${index}`}
+                className={`brand-letter ${index === 0 ? 'brand-initial' : ''} ${character === '.' ? 'brand-letter--accent' : ''}`}
+              >
+                {character}
+                {index === 0 && (
+                  <>
+                    <span className="brand-aura">
+                      <span className="brand-aura__ring brand-aura__ring--outer" />
+                      <span className="brand-aura__ring brand-aura__ring--inner" />
+                    </span>
+                    <span className="brand-haki">
+                      <span className="brand-haki__ray brand-haki__ray--one"><span className="brand-haki__bolt" /></span>
+                      <span className="brand-haki__ray brand-haki__ray--two"><span className="brand-haki__bolt" /></span>
+                      <span className="brand-haki__ray brand-haki__ray--three"><span className="brand-haki__bolt" /></span>
+                      <span className="brand-haki__ray brand-haki__ray--four"><span className="brand-haki__bolt" /></span>
+                    </span>
+                    <span className="brand-straw-hat-positioner">
+                      <span className="brand-straw-hat">
+                        <span className="brand-straw-hat__crown" />
+                        <span className="brand-straw-hat__band" />
+                        <span className="brand-straw-hat__brim" />
+                      </span>
+                    </span>
+                  </>
+                )}
               </span>
-              <span className="brand-straw-hat-positioner">
-                <span className="brand-straw-hat">
-                  <span className="brand-straw-hat__crown" />
-                  <span className="brand-straw-hat__band" />
-                  <span className="brand-straw-hat__brim" />
-                </span>
-              </span>
-            </span>
-            <span>eyvids<span className="text-[var(--accent)]">.</span>dev</span>
+            ))}
           </span>
         </a>
         <ul className="hidden lg:flex items-center gap-5">

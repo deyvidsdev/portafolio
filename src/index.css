@@ -193,9 +193,15 @@ button:not(:disabled) { cursor: pointer; }
   display: inline-flex;
   align-items: baseline;
 }
-.brand-initial {
-  position: relative;
+.brand-letter {
   display: inline-block;
+  transform-origin: 50% 78%;
+}
+.brand-letter--accent {
+  color: var(--accent);
+}
+.brand-letter.brand-initial {
+  position: relative;
 }
 .brand-straw-hat-positioner {
   position: absolute;
@@ -269,6 +275,39 @@ button:not(:disabled) { cursor: pointer; }
   inset: .35rem;
   border-color: var(--gold);
   border-top-color: transparent;
+}
+.brand-haki {
+  position: absolute;
+  z-index: 3;
+  top: 44%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.brand-haki__ray {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.55rem;
+  height: .22rem;
+  transform-origin: 0 50%;
+}
+.brand-haki__ray--one { transform: rotate(-28deg); }
+.brand-haki__ray--two { transform: rotate(42deg); }
+.brand-haki__ray--three { transform: rotate(154deg); }
+.brand-haki__ray--four { transform: rotate(218deg); }
+.brand-haki__bolt {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background: var(--accent);
+  clip-path: polygon(0 36%, 38% 0, 31% 39%, 72% 12%, 55% 54%, 100% 42%, 48% 100%, 57% 61%, 14% 83%);
+  transform-origin: 0 50%;
+}
+.brand-haki__ray:nth-child(even) .brand-haki__bolt {
+  background: var(--gold);
 }
 
 .language-picker {
