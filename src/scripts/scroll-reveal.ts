@@ -25,22 +25,22 @@ export function setupScrollReveal() {
 
       // Preserve each block's own text opacity, and never leave an invisible fill state.
       const opacity = getComputedStyle(element).opacity;
-      const distance = window.innerWidth < 640 ? 12 : 20;
+      const distance = window.innerWidth < 640 ? 14 : 24;
       try {
         const animation = element.animate([
-          { opacity: 0, transform: `translateY(${distance}px)` },
-          { opacity, transform: 'translateY(0)' },
+          { opacity: 0.08, transform: `translate3d(0, ${distance}px, 0)` },
+          { opacity, transform: 'translate3d(0, 0, 0)' },
         ], {
-          duration: 420,
-          delay: Math.min(stagger++ * 55, 165),
-          easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
+          duration: 600,
+          delay: Math.min(stagger++ * 70, 210),
+          easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
           fill: 'backwards',
         });
         active.set(element, animation);
         animation.onfinish = animation.oncancel = () => active.delete(element);
       } catch { /* Keep the server-rendered content visible if animation is unavailable. */ }
     }
-  }, { threshold: 0, rootMargin: '0px 0px -32px 0px' });
+  }, { threshold: 0.04, rootMargin: '0px 0px -8% 0px' });
 
   // Do not hide or replay content already visible on load, including anchor destinations.
   document.querySelectorAll<HTMLElement>(selector).forEach(element => {
