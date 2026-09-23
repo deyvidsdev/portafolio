@@ -52,17 +52,17 @@ Se recuperaron los cuatro proyectos del boceto a petición del propietario, con 
 
 ## Hosting
 
-Destino: https://deyvidsdev.github.io/portafolio/ (inglés: `/portafolio/en/`).
+Destino: https://deyvids.dev/ (inglés: `/en/`).
 
 El workflow `.github/workflows/deploy.yml` publica automáticamente los commits de `main` y permite ejecuciones manuales desde Actions. Instala las dependencias con `npm ci`, verifica los tipos, compila el sitio y despliega únicamente `dist/`. En Settings → Pages, la fuente debe ser **GitHub Actions**.
 
-`actions/configure-pages` proporciona el origen y la ruta base a `SITE_URL` y `BASE_PATH`, por lo que los recursos, los idiomas y las URLs canónicas respetan la dirección de Pages. Para reproducir la compilación:
+El build usa el dominio personalizado como origen y la raíz `/` como ruta base, por lo que los recursos, los idiomas y las URLs canónicas se generan para `deyvids.dev`. Para reproducir la compilación:
 
 ```sh
-SITE_URL=https://deyvidsdev.github.io BASE_PATH=/portafolio npm run build
+SITE_URL=https://deyvids.dev BASE_PATH=/ npm run build
 ```
 
-El despliegue usa el token temporal de GitHub Actions, sin secretos adicionales. Para un dominio propio, primero configura el dominio en Pages y sus registros DNS; después vuelve a ejecutar el workflow para reconstruir las URLs. No se ha configurado un dominio propio.
+El despliegue usa el token temporal de GitHub Actions, sin secretos adicionales. El dominio personalizado `deyvids.dev` está configurado en GitHub Pages y sus registros DNS apuntan a GitHub.
 
 ## Siguientes contenidos
 
