@@ -192,25 +192,27 @@ button:not(:disabled) { cursor: pointer; }
 .brand-wordmark {
   display: inline-flex;
   align-items: baseline;
-  animation: brand-name-reveal 620ms cubic-bezier(.22, 1, .36, 1) backwards;
 }
 .brand-initial {
   position: relative;
   display: inline-block;
 }
-.brand-straw-hat {
+.brand-straw-hat-positioner {
   position: absolute;
-  z-index: 1;
-  top: -.72rem;
+  z-index: 2;
+  top: -.68rem;
   left: 50%;
+  display: block;
+  transform: translateX(-50%) rotate(-18deg);
+  transform-origin: 50% 70%;
+}
+.brand-straw-hat {
+  position: relative;
   display: block;
   width: 1.7rem;
   height: 1.2rem;
-  transform: translateX(-50%) rotate(-8deg);
   transform-origin: 50% 70%;
   filter: drop-shadow(0 2px 0 color-mix(in srgb, #0e1520 28%, transparent));
-  transition: transform 180ms ease;
-  animation: brand-hat-arrive 760ms cubic-bezier(.22, 1, .36, 1) 140ms backwards;
 }
 .brand-straw-hat__crown {
   position: absolute;
@@ -244,78 +246,98 @@ button:not(:disabled) { cursor: pointer; }
   border-radius: 50%;
   background: color-mix(in srgb, var(--gold) 78%, #f6e2a7);
 }
-.brand-home:hover .brand-straw-hat,
-.brand-home:focus-visible .brand-straw-hat {
-  transform: translateX(-50%) translateY(-2px) rotate(-3deg);
+.brand-aura {
+  position: absolute;
+  z-index: 1;
+  top: 48%;
+  left: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
 }
-@keyframes brand-name-reveal {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
+.brand-aura__ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--accent);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  opacity: 0;
 }
-@keyframes brand-hat-arrive {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-12px) rotate(-18deg) scale(.82);
-  }
-  68% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(1px) rotate(-5deg) scale(1.04);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) rotate(-8deg) scale(1);
-  }
+.brand-aura__ring--inner {
+  inset: .35rem;
+  border-color: var(--gold);
+  border-top-color: transparent;
 }
 
-.language-switch {
+.language-picker {
+  position: relative;
+}
+.language-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 4.25rem;
+  gap: .4rem;
+  min-width: 3.5rem;
   min-height: 44px;
-  padding-inline: .35rem;
+  padding-inline: .65rem;
   border: 1px solid color-mix(in srgb, var(--primary-foreground) 50%, transparent);
-  color: color-mix(in srgb, var(--primary-foreground) 66%, transparent);
+  color: var(--primary-foreground);
+  background: transparent;
   font-family: var(--font-mono);
-  font-size: .7rem;
+  font-size: .75rem;
   letter-spacing: .04em;
   transition: border-color 160ms ease, background-color 160ms ease;
 }
-.language-switch:hover {
+.language-button:hover,
+.language-button[aria-expanded="true"] {
   border-color: var(--gold);
   background: color-mix(in srgb, var(--primary-foreground) 7%, transparent);
 }
-.language-switch__option {
-  position: relative;
-  display: inline-grid;
-  place-items: center;
-  min-width: 1.45rem;
-  height: 2rem;
+.language-button__chevron {
+  color: var(--gold);
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 160ms ease;
 }
-.language-switch__option.is-active {
-  color: var(--primary-foreground);
-  font-weight: 700;
+.language-button[aria-expanded="true"] .language-button__chevron {
+  transform: rotate(180deg);
 }
-.language-switch__option.is-active::after {
-  content: '';
+.language-menu {
   position: absolute;
-  bottom: .15rem;
-  left: 50%;
-  width: .8rem;
-  height: 2px;
-  background: var(--accent);
-  transform: translateX(-50%);
+  top: calc(100% + .55rem);
+  right: 0;
+  width: 10.5rem;
+  padding: .35rem;
+  border: 2px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--accent) 75%, transparent);
 }
-.language-switch__divider {
-  color: color-mix(in srgb, var(--primary-foreground) 32%, transparent);
+.language-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: .55rem .65rem;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  border-left: 3px solid transparent;
+}
+a.language-option:hover {
+  background: var(--card);
+  border-left-color: var(--gold);
+}
+.language-option.is-current {
+  color: var(--muted-foreground);
+  border-left-color: var(--accent);
+  background: var(--card);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brand-wordmark,
-  .brand-straw-hat {
-    animation: none;
+  .language-button__chevron {
+    transition: none;
   }
 }
 
