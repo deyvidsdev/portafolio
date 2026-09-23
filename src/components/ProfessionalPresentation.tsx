@@ -18,7 +18,7 @@ export default function ProfessionalPresentation({ content, lang }: Props) {
                 {p.heading1} <span className="text-[var(--accent)]">{p.heading2}</span>
               </h2>
               <div className="flex items-center">
-                <p className="text-base text-[var(--muted-foreground)] leading-relaxed sr" style={{ transitionDelay: '120ms' }}>
+                <p className="text-base text-[var(--muted-foreground)] leading-relaxed sr">
                   {p.intro}
                 </p>
               </div>
@@ -26,12 +26,11 @@ export default function ProfessionalPresentation({ content, lang }: Props) {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 border-2 border-[var(--foreground)]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px border-2 border-[var(--border)] bg-[var(--border)]">
           {p.areas.map((area, i) => (
             <div
               key={i}
-              className="p-6 border-b-2 border-r-2 border-[var(--foreground)] group hover:bg-[var(--primary)] transition-colors duration-200 sr"
-              style={{ transitionDelay: `${i * 50}ms` }}
+              className="p-6 sm:p-7 bg-[var(--background)] group hover:bg-[var(--primary)] transition-colors duration-200 sr"
             >
               <div className="flex items-start justify-between mb-4">
                 <span className="font-mono text-2xl text-[var(--accent)] group-hover:text-[var(--accent-foreground)] transition-colors">{areaIcons[i]}</span>
@@ -43,7 +42,7 @@ export default function ProfessionalPresentation({ content, lang }: Props) {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t-2 border-[var(--foreground)] flex flex-wrap items-center gap-x-6 gap-y-3 sr" style={{ transitionDelay: '500ms' }}>
+        <div className="mt-12 pt-8 border-t-2 border-[var(--foreground)] flex flex-wrap items-center gap-x-6 gap-y-3 sr">
           <span className="font-mono text-[10px] text-[var(--muted-foreground)] tracking-widest uppercase">
             {lang === 'es' ? 'Versiones:' : 'Versions:'}
           </span>

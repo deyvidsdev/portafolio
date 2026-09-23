@@ -26,9 +26,9 @@ export default function Specialties({ content, lang }: Props) {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-0 border-2 border-[var(--foreground)]">
+        <div data-reveal className="grid lg:grid-cols-[1fr_1.2fr] gap-0 border-2 border-[var(--foreground)]">
           {/* Left */}
-          <div className="border-r-2 border-[var(--foreground)]">
+          <div className="border-b-2 lg:border-b-0 lg:border-r-2 border-[var(--foreground)]">
             {s.items.map((item, i) => (
               <button
                 key={i}

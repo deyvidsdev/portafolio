@@ -15,7 +15,7 @@ const links = [
 ---
 <section id="contacto" class="py-20 lg:py-28 bg-[var(--primary)] text-[var(--primary-foreground)]" aria-labelledby="contact-heading">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <div class="relative mb-12 lg:mb-16">
+    <div data-reveal class="relative mb-12 lg:mb-16">
       <div class="absolute -top-4 left-0 chapter-num text-white/10" aria-hidden="true">IX</div>
       <div class="relative">
         <p class="font-mono text-xs uppercase tracking-widest text-[var(--accent)] mb-4">{c.chapter} · {c.sectionLabel}</p>
@@ -23,7 +23,7 @@ const links = [
       </div>
     </div>
     <div class="grid lg:grid-cols-[1fr_1.4fr] gap-10 items-start">
-      <div>
+      <div data-reveal>
         <p class="font-sans leading-relaxed mb-9">{c.desc}</p>
         <ul class="space-y-5">
           {links.map(link => <li><a href={link.href} target={link.href.startsWith('https:') ? '_blank' : undefined} rel="noopener noreferrer" class="flex items-center gap-4 group" aria-label={`${link.label}: ${link.value}`}>
@@ -39,7 +39,7 @@ const links = [
           )}
         </div>
       </div>
-      <div class="border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)] overflow-hidden">
+      <div data-reveal class="border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)] overflow-hidden">
         <h3 class="bg-[var(--accent)] text-[var(--accent-foreground)] px-6 py-3 font-display text-2xl">{c.formTitle}</h3>
         <form id="contact-form" data-recipient={profile.email} class="p-6 flex flex-col gap-5" aria-describedby="contact-help contact-required">
           <p id="contact-help" class="text-sm leading-relaxed text-[var(--muted-foreground)]">{c.formHelp}</p>

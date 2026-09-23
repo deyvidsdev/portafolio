@@ -23,7 +23,7 @@ export default function Methodology({ content }: Props) {
         </div>
 
         {/* Step navigator */}
-        <div className="grid grid-cols-3 sm:grid-cols-6 border-2 mb-0 sr" style={{ transitionDelay: '120ms', borderColor: 'rgba(237,232,223,0.3)' }}>
+        <div className="grid grid-cols-3 sm:grid-cols-6 border-2 mb-0 sr" style={{ borderColor: 'rgba(237,232,223,0.3)' }}>
           {steps.map((step) => (
             <button
               key={step.id}
@@ -44,7 +44,7 @@ export default function Methodology({ content }: Props) {
         </div>
 
         {/* Detail panel */}
-        <div className="manga-panel bg-[var(--background)] sr" style={{ transitionDelay: '200ms', borderColor: 'rgba(237,232,223,0.3)', borderTopWidth: 0 }}>
+        <div className="manga-panel bg-[var(--background)] sr" style={{ borderColor: 'rgba(237,232,223,0.3)', borderTopWidth: 0 }}>
           <div className="grid lg:grid-cols-[auto_1fr] gap-0">
             {/* Big step number */}
             <div className="hidden lg:flex items-center justify-center w-28 border-r-2 border-[var(--foreground)] bg-[var(--accent)]">

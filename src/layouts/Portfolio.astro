@@ -71,5 +71,10 @@ const structuredData = { '@context': 'https://schema.org', '@type': 'Person', na
       <Contact content={tr.contact} lang={lang} />
     </main>
     <noscript><style>#mobile-menu[hidden] { display:flex; flex-wrap:wrap; } #mobile-menu li a { font-size:1rem; padding:.5rem; } nav button { display:none; } #inicio { padding-top:5rem; }</style></noscript>
+    <script>
+      import { setupScrollReveal } from '../scripts/scroll-reveal';
+      const cleanup = setupScrollReveal();
+      document.addEventListener('astro:before-swap', () => cleanup?.(), { once: true });
+    </script>
   </body>
 </html>

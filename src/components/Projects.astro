@@ -13,7 +13,7 @@ const labels = es
 ---
 <section id="proyectos" class="py-20 lg:py-28 bg-[var(--primary)] text-[var(--primary-foreground)]" aria-labelledby="projects-heading">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <div class="relative mb-12">
+    <div data-reveal class="relative mb-12">
       <div class="absolute -top-4 left-0 chapter-num text-white/10" aria-hidden="true">IV</div>
       <div class="relative">
         <h2 id="projects-heading" class="font-display text-5xl xl:text-6xl mb-5">{es ? 'PROYECTOS' : 'SELECTED'} <span class="text-[var(--accent)]">{es ? 'REALIZADOS' : 'PROJECTS'}</span></h2>
@@ -21,7 +21,7 @@ const labels = es
       </div>
     </div>
 
-    <article aria-labelledby={`project-${featured.id}`} class="border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)] mb-6 grid lg:grid-cols-2">
+    <article data-reveal aria-labelledby={`project-${featured.id}`} class="border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)] mb-6 grid lg:grid-cols-2">
       <div class="p-6 sm:p-8 lg:p-10 lg:border-r-2 border-b-2 lg:border-b-0 border-[var(--border)]">
         <div class="flex flex-wrap items-center gap-3 mb-5 text-xs font-mono text-[var(--muted-foreground)]">
           <span class="border border-[var(--border)] px-2 py-1">{featured.version}</span>
@@ -40,11 +40,11 @@ const labels = es
       </dl>
     </article>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 items-stretch gap-5">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 items-start gap-5">
       {rest.map(project => {
         const text = project.content[lang];
         return (
-          <article aria-labelledby={`project-${project.id}`} class="flex min-h-[22rem] flex-col border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)]">
+          <article data-reveal aria-labelledby={`project-${project.id}`} class="project-card flex min-h-[22rem] flex-col border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)]">
             <div class="bg-[var(--accent)] text-[var(--accent-foreground)] px-5 py-3 font-display text-xl">{text.category}</div>
             <div class="flex-1 p-6">
               <span class="inline-block font-mono text-xs text-[var(--muted-foreground)] border border-[var(--border)] px-2 py-1 mb-4">{project.version}</span>
@@ -70,7 +70,7 @@ const labels = es
         );
       })}
     </div>
-    <div class="mt-8">
+    <div data-reveal class="mt-8">
       <a href={profile.github + '?tab=repositories'} target="_blank" rel="noopener noreferrer" class="inline-flex px-6 py-3 border-2 border-white/60 font-display text-xl hover:bg-white hover:text-[var(--primary)] transition-colors">{es ? 'EXPLORAR CÓDIGO EN GITHUB ↗' : 'EXPLORE CODE ON GITHUB ↗'}</a>
     </div>
   </div>

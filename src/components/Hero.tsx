@@ -12,12 +12,12 @@ export default function Hero({ content, lang, children }: Props) {
           {/* Left */}
           <div className="hero-voyage__copy">
             {/* Chapter label */}
-            <div className="inline-flex items-center gap-3 mb-6 sr" style={{ transitionDelay: '60ms' }}>
+            <div className="inline-flex items-center gap-3 mb-6 sr">
               <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--accent)] border border-[var(--accent)] px-2 py-0.5">{h.chapter}</span>
               <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--primary-foreground)] opacity-60">{h.subtitle}</span>
             </div>
 
-            <h1 className="hero-voyage__title font-display text-[var(--primary-foreground)] leading-tight mb-6 sr" style={{ transitionDelay: '140ms' }}>
+            <h1 className="hero-voyage__title font-display text-[var(--primary-foreground)] leading-tight mb-6 sr">
               {h.h1a}{' '}
               <span className="text-[var(--accent)]">{h.h1b}</span>{' '}
               {h.h1c}{' '}
@@ -27,11 +27,11 @@ export default function Hero({ content, lang, children }: Props) {
               </span>
             </h1>
 
-            <p className="text-[var(--primary-foreground)] opacity-75 text-base leading-relaxed mb-10 max-w-lg font-sans sr" style={{ transitionDelay: '220ms' }}>
+            <p className="text-[var(--primary-foreground)] opacity-75 text-base leading-relaxed mb-10 max-w-lg font-sans sr">
               {h.desc}
             </p>
 
-            <div className="flex flex-wrap gap-4 sr" style={{ transitionDelay: '300ms' }}>
+            <div className="flex flex-wrap gap-4 sr">
               <a href="#proyectos" className="inline-flex items-center gap-2 px-7 py-3 bg-[var(--accent)] text-[var(--accent-foreground)] font-display text-xl tracking-wide border-2 border-[var(--accent-foreground)] hover:bg-[var(--primary-foreground)] hover:text-[var(--primary)] transition-colors duration-150">
                 {h.ctaPrimary}
               </a>

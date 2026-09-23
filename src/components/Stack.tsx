@@ -92,9 +92,9 @@ export default function Stack({ content, lang }: Props) {
         </div>
 
         {/* Stack grid — manga panel style */}
-        <div className="grid sm:grid-cols-2 xl:grid-cols-4 border-2 border-[var(--foreground)]">
-          {stackGroups.map((group, i) => (
-            <div key={group.id} className="border-r-2 border-[var(--foreground)] last:border-r-0 sr" style={{ transitionDelay: `${100 + i * 80}ms` }}>
+        <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-px border-2 border-[var(--border)] bg-[var(--border)]">
+          {stackGroups.map((group) => (
+            <div key={group.id} className="bg-[var(--background)] sr">
               {/* Group header */}
               <div className="flex items-center gap-3 p-5 border-b-2 border-[var(--foreground)] bg-[var(--card)]">
                 <span className="font-mono text-xl text-[var(--accent)]">{group.icon}</span>
@@ -113,7 +113,7 @@ export default function Stack({ content, lang }: Props) {
         </div>
 
         {/* Tools strip */}
-        <div className="mt-6 border-2 border-[var(--foreground)] p-5 flex flex-wrap gap-x-6 gap-y-2 items-center sr" style={{ transitionDelay: '450ms' }}>
+        <div className="mt-6 border-2 border-[var(--foreground)] p-5 flex flex-wrap gap-x-6 gap-y-2 items-center sr">
           <span className="font-mono text-[10px] text-[var(--muted-foreground)] tracking-widest uppercase shrink-0">{lang === 'es' ? 'También uso:' : 'Also use:'}</span>
           {['VS Code', 'pgAdmin', 'Postman', 'GitHub Actions', 'Figma', 'Obsidian'].map((t) => (
             <span key={t} className="font-sans text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors cursor-default">{t}</span>

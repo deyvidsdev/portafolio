@@ -174,8 +174,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.08;
 }
 
-/* Server-rendered content stays visible before hydration and without JavaScript. */
-.sr, .sr-fade, .sr-left { opacity: 1; transform: none; }
+/* Scroll reveals use the Web Animations API; base content is always visible. */
 section[id] { scroll-margin-top: 5rem; }
 body { margin: 0; }
 button, a { -webkit-tap-highlight-color: transparent; }
@@ -270,4 +269,16 @@ button:not(:disabled) { cursor: pointer; }
   .navigation-chart__log-index { font-size: 2rem; }
   .navigation-chart__log h3 { font-size: 1.4rem; }
   .navigation-chart__description { font-size: .8rem; }
+}
+
+
+/* Subtle feedback keeps the original square card silhouette. */
+.project-card { transition: border-color 180ms ease, box-shadow 180ms ease; }
+.project-card:focus-within { border-color: var(--gold); }
+.project-details summary { min-height: 3.5rem; }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { border-color: var(--accent); box-shadow: 0 4px 0 color-mix(in srgb, var(--accent) 30%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card { transition: none; }
 }
