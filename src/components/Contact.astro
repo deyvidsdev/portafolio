@@ -1,0 +1,20 @@
+---
+import { profile } from '../data/profile';
+import type { translations, Lang } from '../data/translations';
+const { content, lang } = Astro.props as { content: (typeof translations)[Lang]['contact']; lang: Lang };
+const es = lang === 'es';
+---
+<section id="contacto" class="py-20 lg:py-28 bg-[var(--primary)] text-[var(--primary-foreground)]" aria-labelledby="contact-heading">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <h2 id="contact-heading" class="font-display text-5xl xl:text-6xl max-w-3xl mb-7">{content.heading1} <span class="text-[var(--accent)]">{content.heading2}</span></h2>
+    <p class="font-sans max-w-xl leading-relaxed mb-9">{content.desc}</p>
+    <div class="flex flex-wrap gap-4">
+      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="bg-[var(--accent)] text-white border-2 border-white px-7 py-3 font-display text-xl hover:bg-white hover:text-[var(--primary)] transition-colors">{es ? 'CONVERSEMOS EN LINKEDIN ↗' : 'LET’S CONNECT ON LINKEDIN ↗'}</a>
+      <a href={profile.github} target="_blank" rel="noopener noreferrer" class="border-2 border-white px-7 py-3 font-display text-xl hover:bg-white hover:text-[var(--primary)] transition-colors">GITHUB ↗</a>
+    </div>
+    <footer class="mt-16 pt-8 border-t border-white/30 flex flex-wrap justify-between gap-4 text-sm font-mono">
+      <p>© {new Date().getFullYear()} · {profile.name}</p>
+      <a href="#inicio" class="underline underline-offset-4">{es ? 'Volver al inicio ↑' : 'Back to top ↑'}</a>
+    </footer>
+  </div>
+</section>

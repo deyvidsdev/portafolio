@@ -1,0 +1,72 @@
+---
+import '@fontsource/bangers/latin-400.css';
+import '@fontsource/lora/latin-400.css';
+import '@fontsource/lora/latin-500.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '../index.css';
+import Nav from '../components/Nav';
+import Hero from '../components/Hero';
+import ProfessionalPresentation from '../components/ProfessionalPresentation';
+import Specialties from '../components/Specialties';
+import Projects from '../components/Projects.astro';
+import Stack from '../components/Stack';
+import Methodology from '../components/Methodology';
+import AboutMe from '../components/AboutMe.astro';
+import Contact from '../components/Contact.astro';
+import { translations, type Lang } from '../data/translations';
+import { profile } from '../data/profile';
+const { lang = 'es' } = Astro.props as { lang?: Lang };
+const tr = translations[lang];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+const spanishPath = base;
+const englishPath = base + 'en/';
+const path = lang === 'es' ? spanishPath : englishPath;
+const title = lang === 'es' ? 'Deyvids Alvino | Desarrollador Odoo & OWL' : 'Deyvids Alvino | Odoo & OWL Developer';
+const description = lang === 'es' ? 'Desarrollo Odoo 16–19, frontend OWL, localización peruana, integraciones y migraciones. Conoce mi enfoque técnico y mi trabajo.' : 'Odoo 16–19 development, OWL interfaces, Peruvian localization, integrations and migrations. Explore my work and technical approach.';
+const canonical = Astro.site ? new URL(path, Astro.site).href : undefined;
+const structuredData = { '@context': 'https://schema.org', '@type': 'Person', name: profile.name, jobTitle: 'Odoo & OWL Developer', sameAs: [profile.github, profile.linkedin], ...(canonical ? { url: canonical } : {}) };
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1A2744" />
+    <title>{title}</title>
+    <link rel="icon" href={base + 'favicon.svg'} type="image/svg+xml" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="alternate" hreflang="es" href={Astro.site ? new URL(spanishPath, Astro.site).href : spanishPath} />
+    <link rel="alternate" hreflang="en" href={Astro.site ? new URL(englishPath, Astro.site).href : englishPath} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_PE' : 'en_US'} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem('portfolio-theme');
+        document.documentElement.classList.toggle('dark', stored ? stored === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
+      } catch {
+        document.documentElement.classList.toggle('dark', matchMedia('(prefers-color-scheme: dark)').matches);
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
+    <Nav lang={lang} links={tr.nav.links} alternateHref={lang === 'es' ? englishPath : spanishPath} client:load />
+    <main id="main-content" tabindex="-1">
+      <Hero content={tr.hero} lang={lang} />
+      <ProfessionalPresentation content={tr.presentation} lang={lang} />
+      <Specialties content={tr.specialties} lang={lang} client:load />
+      <Projects lang={lang} />
+      <Stack content={tr.stack} lang={lang} />
+      <Methodology content={tr.methodology} lang={lang} client:load />
+      <AboutMe content={tr.about} lang={lang} />
+      <Contact content={tr.contact} lang={lang} />
+    </main>
+    <noscript><style>#mobile-menu[hidden] { display:flex; flex-wrap:wrap; } #mobile-menu li a { font-size:1rem; padding:.5rem; } nav button { display:none; } #inicio { padding-top:5rem; }</style></noscript>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-display: 'Bangers', cursive;
+  --font-sans: 'Lora', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+}
+
+:root {
+  --background: #F6F3EE;
+  --foreground: #1C1208;
+  --card: #EDEBE4;
+  --card-foreground: #1C1208;
+  --primary: #1A2744;
+  --primary-foreground: #F6F3EE;
+  --secondary: #8B1A1A;
+  --secondary-foreground: #F6F3EE;
+  --muted: #D6D2C8;
+  --muted-foreground: #5E5040;
+  --accent: #C8432A;
+  --accent-foreground: #F6F3EE;
+  --border: #1C1208;
+  --ring: #C8432A;
+  --radius: 0px;
+  --gold: #C9922A;
+}
+
+.dark {
+  --background: #0E1520;
+  --foreground: #EDE8DF;
+  --card: #162030;
+  --card-foreground: #EDE8DF;
+  --primary: #1A2F50;
+  --primary-foreground: #EDE8DF;
+  --secondary: #8B1A1A;
+  --secondary-foreground: #EDE8DF;
+  --muted: #1E2D44;
+  --muted-foreground: #A8A098;
+  --accent: #E05530;
+  --accent-foreground: #EDE8DF;
+  --border: #3A4F6A;
+  --ring: #E05530;
+  --gold: #D4A035;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Manga decorative utilities ── */
+
+/* Halftone dot pattern */
+.halftone {
+  background-image: radial-gradient(circle, var(--foreground) 1.2px, transparent 1.2px);
+  background-size: 8px 8px;
+  opacity: 0.07;
+}
+
+/* Parchment texture */
+.parchment {
+  background-image:
+    radial-gradient(ellipse at 15% 50%, rgba(180,140,50,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(140,100,20,0.10) 0%, transparent 45%);
+}
+
+/* Speed lines (manga radial) */
+.speed-lines {
+  background-image: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    transparent 3.5deg,
+    rgba(237,232,223,0.045) 3.5deg,
+    rgba(237,232,223,0.045) 4deg
+  );
+}
+
+/* Manga panel border */
+.manga-panel {
+  border: 2.5px solid var(--foreground);
+}
+
+/* Chapter ghost number */
+.chapter-num {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 16vw, 13rem);
+  line-height: 0.85;
+  color: var(--foreground);
+  opacity: 0.055;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Route line animation */
+.route-line {
+  stroke-dasharray: 8 5;
+  stroke-dashoffset: 0;
+  animation: dash 18s linear infinite;
+}
+@keyframes dash { to { stroke-dashoffset: -260; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .route-line { animation: none; }
+}
+
+/* Nautical grid (kept for compatibility) */
+.nautical-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.08;
+}
+
+/* Server-rendered content stays visible before hydration and without JavaScript. */
+.sr, .sr-fade, .sr-left { opacity: 1; transform: none; }
+section[id] { scroll-margin-top: 5rem; }
+body { margin: 0; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled) { cursor: pointer; }
+.route-line { animation: none; }
+.skip-link { position: fixed; top: -100px; left: 1rem; z-index: 100; padding: .75rem 1rem; background: var(--background); color: var(--foreground); }
+.skip-link:focus { top: 1rem; }
+@media (max-width: 639px) {
+  #metodologia button { min-height: 44px; }
+}

@@ -1,0 +1,21 @@
+---
+import { profile } from '../data/profile';
+import type { translations, Lang } from '../data/translations';
+const { content } = Astro.props as { content: (typeof translations)[Lang]['about']; lang: Lang };
+---
+<section id="sobre-mi" class="py-20 lg:py-28 bg-[var(--background)] parchment" aria-labelledby="about-heading">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-[.7fr_1.3fr] gap-12 lg:gap-20">
+    <div class="border-l-4 border-[var(--accent)] pl-6 self-start">
+      <p class="font-display text-4xl mb-3">{profile.name}</p>
+      <p class="font-mono text-sm text-[var(--muted-foreground)]">Odoo · Python · OWL</p>
+      <a class="inline-block mt-6 font-mono text-sm underline underline-offset-4" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+    </div>
+    <div>
+      <h2 id="about-heading" class="font-display text-4xl sm:text-5xl mb-8">{content.heading1} <span class="text-[var(--accent)]">{content.heading2}</span></h2>
+      <div class="space-y-5 text-[var(--muted-foreground)] leading-relaxed font-sans"><p>{content.bio1}</p><p>{content.bio2}</p></div>
+      <dl class="mt-8 grid sm:grid-cols-3 gap-6">
+        {content.values.map(value => <div><dt class="font-display text-2xl mb-2">{value.label}</dt><dd class="text-sm text-[var(--muted-foreground)] leading-relaxed">{value.desc}</dd></div>)}
+      </dl>
+    </div>
+  </div>
+</section>
