@@ -52,22 +52,23 @@ Se recuperaron los cuatro proyectos del boceto a petición del propietario, con 
 
 ## Hosting
 
-La salida `dist/` es estática y puede desplegarse en un hosting compatible. Crear este repositorio **no publica automáticamente la web**. El workflow solo valida; no despliega.
+Destino: https://deyvidsdev.github.io/portafolio/ (inglés: `/portafolio/en/`).
 
-Cuando se decida el destino, configura las variables del entorno de compilación:
+El workflow `.github/workflows/deploy.yml` publica automáticamente los commits de `main` y permite ejecuciones manuales desde Actions. Instala las dependencias con `npm ci`, verifica los tipos, compila el sitio y despliega únicamente `dist/`. En Settings → Pages, la fuente debe ser **GitHub Actions**.
+
+`actions/configure-pages` proporciona el origen y la ruta base a `SITE_URL` y `BASE_PATH`, por lo que los recursos, los idiomas y las URLs canónicas respetan la dirección de Pages. Para reproducir la compilación:
 
 ```sh
-# Ejemplo para un proyecto de GitHub Pages:
 SITE_URL=https://deyvidsdev.github.io BASE_PATH=/portafolio npm run build
 ```
 
-Para un dominio propio utiliza su URL en `SITE_URL` y `BASE_PATH=/`. La URL canónica y las rutas de idiomas y recursos se construyen con esos valores. No existe todavía configuración DNS ni despliegue público.
+El despliegue usa el token temporal de GitHub Actions, sin secretos adicionales. Para un dominio propio, primero configura el dominio en Pages y sus registros DNS; después vuelve a ejecutar el workflow para reconstruir las URLs. No se ha configurado un dominio propio.
 
 ## Siguientes contenidos
 
 1. Revisar el texto de los proyectos restaurados y añadir resultados y estados solo cuando estén confirmados.
 2. Incorporar la fotografía y el PDF del CV reales; configurar `photoPath` y `cvPath` en `src/data/profile.ts` con rutas relativas a `public/`.
 3. Redactar casos o artículos antes de habilitar una bitácora.
-4. Elegir dominio y hosting para publicar. Si se necesita envío directo desde la web, conectar un servicio de correo y validar su entrega.
+4. Conectar un dominio propio cuando se elija. Si se necesita envío directo desde la web, conectar un servicio de correo y validar su entrega.
 
 Consulta `docs/01-auditoria-figma.md` y `docs/02-validacion.md` para el alcance de la adaptación y sus comprobaciones.
