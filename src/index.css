@@ -202,6 +202,7 @@ button:not(:disabled) { cursor: pointer; }
 }
 .brand-letter.brand-initial {
   position: relative;
+  z-index: 2;
 }
 .brand-straw-hat-positioner {
   position: absolute;
@@ -293,35 +294,11 @@ button:not(:disabled) { cursor: pointer; }
   transform: rotate(-9deg);
   box-shadow: .48rem .11rem 0 #a66f1f, .94rem -.02rem 0 #a66f1f, 1.35rem .12rem 0 #a66f1f;
 }
-.brand-aura {
-  position: absolute;
-  z-index: 1;
-  top: 48%;
-  left: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-}
-.brand-aura__ring {
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--accent);
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  opacity: 0;
-}
-.brand-aura__ring--inner {
-  inset: .35rem;
-  border-color: var(--gold);
-  border-top-color: transparent;
-}
 .brand-haki {
   position: absolute;
-  z-index: 3;
-  top: 44%;
-  left: 50%;
+  z-index: 4;
+  top: 47%;
+  left: 44%;
   width: 1px;
   height: 1px;
   pointer-events: none;
@@ -330,25 +307,34 @@ button:not(:disabled) { cursor: pointer; }
   position: absolute;
   top: 0;
   left: 0;
-  width: 1.55rem;
-  height: .22rem;
+  width: var(--haki-length, 4rem);
+  height: .72rem;
   transform-origin: 0 50%;
 }
-.brand-haki__ray--one { transform: rotate(-28deg); }
-.brand-haki__ray--two { transform: rotate(42deg); }
-.brand-haki__ray--three { transform: rotate(154deg); }
-.brand-haki__ray--four { transform: rotate(218deg); }
+.brand-haki__ray--one { --haki-length: 6.2rem; transform: rotate(-22deg); }
+.brand-haki__ray--two { --haki-length: 5.4rem; transform: rotate(31deg); }
+.brand-haki__ray--three { --haki-length: 3.2rem; transform: rotate(146deg); }
+.brand-haki__ray--four { --haki-length: 3.3rem; transform: rotate(202deg); }
+.brand-haki__ray--five { --haki-length: 4rem; transform: rotate(-76deg); }
+.brand-haki__ray--six { --haki-length: 4rem; transform: rotate(78deg); }
 .brand-haki__bolt {
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
   opacity: 0;
-  background: var(--accent);
-  clip-path: polygon(0 36%, 38% 0, 31% 39%, 72% 12%, 55% 54%, 100% 42%, 48% 100%, 57% 61%, 14% 83%);
+  background: #ef3131;
+  clip-path: polygon(0 43%, 17% 5%, 25% 39%, 46% 0, 40% 43%, 69% 14%, 58% 54%, 100% 34%, 72% 68%, 82% 100%, 48% 72%, 22% 94%, 29% 60%);
+  filter: drop-shadow(0 0 5px rgba(239, 49, 49, .95)) drop-shadow(2px 2px 0 rgba(18, 8, 13, .95));
   transform-origin: 0 50%;
 }
-.brand-haki__ray:nth-child(even) .brand-haki__bolt {
-  background: var(--gold);
+.brand-haki__bolt::after {
+  content: '';
+  position: absolute;
+  inset: 31% 8% 31% 4%;
+  background: #ff9a8d;
+  clip-path: polygon(0 40%, 24% 0, 31% 42%, 57% 10%, 50% 55%, 100% 36%, 72% 75%, 44% 62%, 17% 100%, 25% 58%);
+  opacity: .86;
 }
 
 .language-picker {

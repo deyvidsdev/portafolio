@@ -72,57 +72,62 @@ export default function Nav({ lang, links, alternateHref }: Props) {
       if (!active) return;
       const letters = root.querySelectorAll<HTMLElement>('.brand-letter');
       const hat = root.querySelector<HTMLElement>('.brand-straw-hat');
-      const aura = root.querySelectorAll<HTMLElement>('.brand-aura__ring');
       const hakiBolts = root.querySelectorAll<HTMLElement>('.brand-haki__bolt');
-      if (!letters.length || !hat || !aura.length || !hakiBolts.length) return;
+      if (!letters.length || !hat || !hakiBolts.length) return;
 
       timeline = createTimeline()
         .add(letters, {
           opacity: [0, 1],
-          y: [10, 0],
-          scaleX: [.62, 1.08],
-          scaleY: [1.55, .9],
-          duration: 390,
-          delay: stagger(32),
-          ease: 'out(4)',
+          y: [-34, 3],
+          scaleX: [.28, 1.14],
+          scaleY: [2.25, .72],
+          duration: 520,
+          delay: stagger(34),
+          ease: 'in(2.6)',
         }, 0)
         .add(letters, {
+          y: 0,
           scaleX: 1,
           scaleY: 1,
-          duration: 430,
-          delay: stagger(22),
-          ease: 'outElastic(.85, .55)',
-        }, 230)
+          duration: 520,
+          delay: stagger(25),
+          ease: 'outElastic(.9, .42)',
+        }, 500)
         .add(hat, {
           opacity: [0, 1],
-          y: [-18, 0],
-          scaleX: [.5, 1.16],
-          scaleY: [1.75, .86],
-          rotate: [-14, 0],
-          duration: 520,
-          ease: 'out(4)',
-        }, 80)
+          y: [-48, 3],
+          scaleX: [.42, 1.2],
+          scaleY: [2.2, .72],
+          rotate: [-28, 2],
+          duration: 610,
+          ease: 'in(2.8)',
+        }, 150)
         .add(hat, {
+          y: 0,
           scaleX: 1,
           scaleY: 1,
-          duration: 560,
-          ease: 'outElastic(.9, .45)',
-        }, 370)
-        .add(aura, {
-          opacity: [0, .92, 0],
-          scale: [.25, 1.9],
-          rotate: [0, 165],
-          duration: 680,
-          delay: stagger(65),
-          ease: 'outExpo',
-        }, 400)
+          rotate: 0,
+          duration: 620,
+          ease: 'outElastic(.92, .38)',
+        }, 750)
+        .add(root, {
+          x: [-4, 5],
+          duration: 75,
+          ease: 'linear',
+        }, 755)
+        .add(root, {
+          x: [5, 0],
+          duration: 260,
+          ease: 'outElastic(.8, .3)',
+        }, 830)
         .add(hakiBolts, {
-          opacity: [0, 1, 0],
-          scaleX: [0, 1.15],
-          duration: 460,
-          delay: stagger(38),
+          opacity: [0, 1, .16, 1, 0],
+          scaleX: [.04, 1.12],
+          scaleY: [.45, 1.08],
+          duration: 760,
+          delay: stagger(48, { from: 'center' }),
           ease: 'outExpo',
-        }, 430);
+        }, 735);
     });
 
     return () => {
@@ -156,15 +161,13 @@ export default function Nav({ lang, links, alternateHref }: Props) {
                 {character}
                 {index === 0 && (
                   <>
-                    <span className="brand-aura">
-                      <span className="brand-aura__ring brand-aura__ring--outer" />
-                      <span className="brand-aura__ring brand-aura__ring--inner" />
-                    </span>
                     <span className="brand-haki">
                       <span className="brand-haki__ray brand-haki__ray--one"><span className="brand-haki__bolt" /></span>
                       <span className="brand-haki__ray brand-haki__ray--two"><span className="brand-haki__bolt" /></span>
                       <span className="brand-haki__ray brand-haki__ray--three"><span className="brand-haki__bolt" /></span>
                       <span className="brand-haki__ray brand-haki__ray--four"><span className="brand-haki__bolt" /></span>
+                      <span className="brand-haki__ray brand-haki__ray--five"><span className="brand-haki__bolt" /></span>
+                      <span className="brand-haki__ray brand-haki__ray--six"><span className="brand-haki__bolt" /></span>
                     </span>
                     <span className="brand-straw-hat-positioner">
                       <span className="brand-straw-hat">
