@@ -1,22 +1,82 @@
 ---
 import { profile } from '../data/profile';
+import { projects } from '../data/projects';
 import type { Lang } from '../data/translations';
 const { lang } = Astro.props as { lang: Lang };
 const es = lang === 'es';
+const featured = projects.find(project => project.featured)!;
+const featuredText = featured.content[lang];
+const rest = projects.filter(project => project.id !== featured.id);
+const labels = es
+  ? { problem: 'Problema', solution: 'Solución técnica', stack: 'Tecnologías', open: 'Ver detalle', close: 'Cerrar detalle' }
+  : { problem: 'Problem', solution: 'Technical solution', stack: 'Technologies', open: 'View details', close: 'Close details' };
 ---
 <section id="proyectos" class="py-20 lg:py-28 bg-[var(--primary)] text-[var(--primary-foreground)]" aria-labelledby="projects-heading">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <h2 id="projects-heading" class="font-display text-5xl xl:text-6xl mb-8">{es ? 'PROYECTOS Y' : 'PROJECTS &'} <span class="text-[var(--accent)]">{es ? 'CÓDIGO' : 'CODE'}</span></h2>
-    <div class="grid lg:grid-cols-[1.2fr_1fr] border-2 border-white/30">
-      <div class="p-8 lg:p-10">
-        <p class="font-sans text-lg leading-relaxed max-w-xl mb-6">{es ? 'Desarrollo módulos, interfaces e integraciones para resolver procesos de negocio con Odoo.' : 'I develop modules, interfaces and integrations to support business processes with Odoo.'}</p>
-        <p class="font-sans text-sm leading-relaxed opacity-80 max-w-xl">{es ? 'Puedes explorar mi código público en GitHub. Aquí iré documentando los proyectos que pueda compartir, con su contexto, solución técnica y estado de validación.' : 'Explore my public code on GitHub. I will document shareable projects here, including their context, technical solution and validation status.'}</p>
+    <div class="relative mb-12">
+      <div class="absolute -top-4 left-0 chapter-num text-white/10" aria-hidden="true">IV</div>
+      <div class="relative">
+        <h2 id="projects-heading" class="font-display text-5xl xl:text-6xl mb-5">{es ? 'PROYECTOS' : 'SELECTED'} <span class="text-[var(--accent)]">{es ? 'REALIZADOS' : 'PROJECTS'}</span></h2>
+        <p class="font-sans text-sm sm:text-base leading-relaxed max-w-2xl">{es ? 'Una selección de mi trabajo en localización peruana, facturación electrónica, tesorería y migraciones de Odoo.' : 'A selection of my work in Peruvian localization, electronic invoicing, treasury and Odoo migrations.'}</p>
       </div>
-      <div class="bg-[var(--background)] text-[var(--foreground)] p-8 lg:p-10 flex flex-col justify-center items-start gap-5">
-        <span class="font-mono text-sm">github.com/deyvidsdev</span>
-        <h3 class="font-display text-3xl">{es ? 'EXPLORA MIS REPOSITORIOS' : 'EXPLORE MY REPOSITORIES'}</h3>
-        <a href={profile.github + '?tab=repositories'} target="_blank" rel="noopener noreferrer" class="inline-flex px-6 py-3 border-2 border-[var(--border)] font-display text-xl hover:bg-[var(--accent)] hover:text-white transition-colors">{es ? 'VER EN GITHUB ↗' : 'VIEW ON GITHUB ↗'}</a>
+    </div>
+
+    <article aria-labelledby={`project-${featured.id}`} class="border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)] mb-6 grid lg:grid-cols-2">
+      <div class="p-6 sm:p-8 lg:p-10 lg:border-r-2 border-b-2 lg:border-b-0 border-[var(--border)]">
+        <div class="flex flex-wrap items-center gap-3 mb-5 text-xs font-mono text-[var(--muted-foreground)]">
+          <span class="border border-[var(--border)] px-2 py-1">{featured.version}</span>
+          <span>{featuredText.category}</span>
+        </div>
+        <h3 id={`project-${featured.id}`} class="font-display text-3xl xl:text-4xl mb-4">{featuredText.name}</h3>
+        <p class="font-sans text-sm leading-relaxed text-[var(--muted-foreground)] mb-6">{featuredText.context}</p>
+        <ul aria-label={labels.stack} class="flex flex-wrap gap-2">
+          {featured.stack.map(tech => <li class="font-mono text-xs border border-[var(--border)] bg-[var(--card)] px-2 py-1">{tech}</li>)}
+        </ul>
       </div>
+      <dl class="p-6 sm:p-8 lg:p-10 space-y-6">
+        {[{ label: labels.problem, value: featuredText.problem }, { label: labels.solution, value: featuredText.solution }].map(field => (
+          <div><dt class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--muted-foreground)]">{field.label}</dt><dd class="font-sans text-sm leading-relaxed">{field.value}</dd></div>
+        ))}
+      </dl>
+    </article>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 items-start gap-5">
+      {rest.map(project => {
+        const text = project.content[lang];
+        return (
+          <article aria-labelledby={`project-${project.id}`} class="border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)]">
+            <div class="bg-[var(--accent)] text-[var(--accent-foreground)] px-5 py-3 font-display text-xl">{text.category}</div>
+            <div class="p-6">
+              <span class="inline-block font-mono text-xs text-[var(--muted-foreground)] border border-[var(--border)] px-2 py-1 mb-4">{project.version}</span>
+              <h3 id={`project-${project.id}`} class="font-display text-2xl mb-3">{text.name}</h3>
+              <p class="font-sans text-sm leading-relaxed text-[var(--muted-foreground)]">{text.context}</p>
+            </div>
+            <details class="project-details border-t-2 border-[var(--border)]">
+              <summary class="px-6 py-4 font-display text-lg cursor-pointer hover:bg-[var(--card)] transition-colors" aria-label={`${labels.open}: ${text.name}`}>
+                <span class="when-closed">{labels.open}</span><span class="when-open">{labels.close}</span>
+              </summary>
+              <div class="p-6 pt-2 space-y-5 bg-[var(--card)]">
+                <dl class="space-y-5">
+                  <div><dt class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--muted-foreground)]">{labels.problem}</dt><dd class="font-sans text-sm leading-relaxed">{text.problem}</dd></div>
+                  <div><dt class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--muted-foreground)]">{labels.solution}</dt><dd class="font-sans text-sm leading-relaxed">{text.solution}</dd></div>
+                </dl>
+                <ul aria-label={labels.stack} class="flex flex-wrap gap-2">
+                  {project.stack.map(tech => <li class="font-mono text-xs border border-[var(--border)] px-2 py-1">{tech}</li>)}
+                </ul>
+              </div>
+            </details>
+          </article>
+        );
+      })}
+    </div>
+    <div class="mt-8">
+      <a href={profile.github + '?tab=repositories'} target="_blank" rel="noopener noreferrer" class="inline-flex px-6 py-3 border-2 border-white/60 font-display text-xl hover:bg-white hover:text-[var(--primary)] transition-colors">{es ? 'EXPLORAR CÓDIGO EN GITHUB ↗' : 'EXPLORE CODE ON GITHUB ↗'}</a>
     </div>
   </div>
 </section>
+<style>
+  .project-details .when-open { display: none; }
+  .project-details[open] .when-closed { display: none; }
+  .project-details[open] .when-open { display: inline; }
+  .project-details summary::marker { color: var(--accent); }
+</style>

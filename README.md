@@ -30,6 +30,7 @@ src/
   components/         # Secciones Astro y componentes React
   data/
     profile.ts        # Identidad y enlaces profesionales
+    projects.ts       # Proyectos del portafolio en español e inglés
     translations.ts   # Contenido traducido
   index.css           # Tokens de diseño y estilos globales
 public/               # Recursos estáticos
@@ -42,11 +43,11 @@ Vite 7.3.6 se fija explícitamente porque Astro 6 usa Vite 7; permitir Vite 8 a 
 
 - Perfil y enlaces: `src/data/profile.ts`.
 - Texto de las secciones: `src/data/translations.ts`.
-- Casos de proyectos: `src/components/Projects.astro`.
+- Proyectos y sus detalles: `src/data/projects.ts`; presentación en `src/components/Projects.astro`.
 - Colores, fuentes y estilos: `src/index.css`.
 - SEO: `src/layouts/Portfolio.astro`.
 
-Los casos de ejemplo, métricas y artículos ficticios del ZIP se retiraron. El contacto enlaza a LinkedIn y GitHub; no hay un formulario que simule envíos. No se publica un correo ni CV hasta confirmar los datos. Las fuentes se incluyen localmente con Fontsource.
+Se recuperaron los cuatro proyectos del boceto a petición del propietario, con una ficha destacada y tres tarjetas desplegables. Las métricas, los estados de producción no confirmados y los artículos ficticios del ZIP se retiraron. El contacto enlaza a LinkedIn y GitHub; no hay un formulario que simule envíos. No se publica un correo ni CV hasta confirmar los datos. Las fuentes se incluyen localmente con Fontsource.
 
 ## Hosting
 
@@ -63,7 +64,7 @@ Para un dominio propio utiliza su URL en `SITE_URL` y `BASE_PATH=/`. La URL can�
 
 ## Siguientes contenidos
 
-1. Seleccionar proyectos que puedan mostrarse públicamente y completar su contexto, solución y estado real.
+1. Revisar el texto de los proyectos restaurados y añadir resultados y estados solo cuando estén confirmados.
 2. Confirmar si se publicarán correo, fotografía y CV.
 3. Redactar casos o artículos antes de habilitar una bitácora.
 4. Elegir dominio y hosting para publicar.

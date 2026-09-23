@@ -18,3 +18,11 @@ Validado localmente el 22/09/2026, con Node 24.14.0.
 - Fuentes locales; no hay peticiones a Google Fonts en el HTML generado.
 
 Alcance: estas comprobaciones no equivalen a una auditoría WCAG completa, métricas Lighthouse ni pruebas en dispositivos físicos. Faltan contenido de proyectos confirmado, fotografía/CV si se desean y una decisión de hosting para publicar.
+
+## Restauración de proyectos solicitada por el propietario
+
+- Recuperados cuatro proyectos del boceto: Detracciones SUNAT, Facturación Electrónica OSE, Dashboard de Tesorería OWL y Migración v17 → v19.
+- Una ficha destacada y tres tarjetas con detalles HTML nativos, accesibles sin añadir JavaScript.
+- Contenido español/inglés centralizado en `src/data/projects.ts`. No se reincorporan métricas ni estados de entrega sin confirmar.
+- `npm run check`: 0 errores, advertencias o sugerencias. `npm run build`: ambas rutas generadas.
+- Navegador: cuatro fichas presentes; apertura con ratón y cierre con Enter; vista de 390 px sin desbordamiento; nombres de los cuatro proyectos traducidos; sin errores de consola.
