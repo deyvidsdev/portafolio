@@ -51,18 +51,32 @@ export default function Nav({ lang, links, alternateHref }: Props) {
           className="brand-home font-display text-2xl tracking-wider shrink-0"
           aria-label={es ? 'deyvids.dev - Inicio' : 'deyvids.dev - Home'}
         >
-          <span className="brand-straw-hat" aria-hidden="true">
-            <span className="brand-straw-hat__crown" />
-            <span className="brand-straw-hat__band" />
-            <span className="brand-straw-hat__brim" />
+          <span className="brand-wordmark" aria-hidden="true">
+            <span className="brand-initial">
+              d
+              <span className="brand-straw-hat">
+                <span className="brand-straw-hat__crown" />
+                <span className="brand-straw-hat__band" />
+                <span className="brand-straw-hat__brim" />
+              </span>
+            </span>
+            <span>eyvids<span className="text-[var(--accent)]">.</span>dev</span>
           </span>
-          <span>deyvids<span className="text-[var(--accent)]">.</span>dev</span>
         </a>
         <ul className="hidden lg:flex items-center gap-5">
           {links.map(link => <li key={link.href}><a className="font-display text-lg hover:text-[var(--accent)] transition-colors" href={link.href}>{link.label}</a></li>)}
         </ul>
         <div className="flex items-center gap-2">
-          <a href={alternateHref} hrefLang={es ? 'en' : 'es'} aria-label={es ? 'Switch to English' : 'Cambiar a español'} className="min-w-11 min-h-11 flex items-center justify-center border border-white/50 font-mono text-sm">{es ? 'EN' : 'ES'}</a>
+          <a
+            href={alternateHref}
+            hrefLang={es ? 'en' : 'es'}
+            aria-label={es ? 'Cambiar a inglés' : 'Switch to Spanish'}
+            className="language-switch"
+          >
+            <span lang="es" className={`language-switch__option ${es ? 'is-active' : ''}`}>ES</span>
+            <span className="language-switch__divider" aria-hidden="true">/</span>
+            <span lang="en" className={`language-switch__option ${es ? '' : 'is-active'}`}>EN</span>
+          </a>
           <button onClick={toggleTheme} aria-label={es ? 'Alternar tema oscuro' : 'Toggle dark theme'} aria-pressed={darkMode} className="min-w-11 min-h-11 border border-white/50 text-xl">{darkMode ? '☀' : '☾'}</button>
           <button ref={menuButton} onClick={() => setMenuOpen(!menuOpen)} aria-label={es ? 'Menú' : 'Menu'} aria-expanded={menuOpen} aria-controls="mobile-menu" className="lg:hidden min-w-11 min-h-11 border border-white/50 text-xl">{menuOpen ? '×' : '☰'}</button>
         </div>

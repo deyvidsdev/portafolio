@@ -187,19 +187,30 @@ button:not(:disabled) { cursor: pointer; }
 .brand-home {
   display: inline-flex;
   align-items: center;
-  gap: .4rem;
   min-height: 44px;
 }
-.brand-straw-hat {
+.brand-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  animation: brand-name-reveal 620ms cubic-bezier(.22, 1, .36, 1) backwards;
+}
+.brand-initial {
   position: relative;
   display: inline-block;
+}
+.brand-straw-hat {
+  position: absolute;
+  z-index: 1;
+  top: -.72rem;
+  left: 50%;
+  display: block;
   width: 1.7rem;
   height: 1.2rem;
-  flex: none;
-  transform: rotate(-8deg);
+  transform: translateX(-50%) rotate(-8deg);
   transform-origin: 50% 70%;
   filter: drop-shadow(0 2px 0 color-mix(in srgb, #0e1520 28%, transparent));
   transition: transform 180ms ease;
+  animation: brand-hat-arrive 760ms cubic-bezier(.22, 1, .36, 1) 140ms backwards;
 }
 .brand-straw-hat__crown {
   position: absolute;
@@ -235,7 +246,77 @@ button:not(:disabled) { cursor: pointer; }
 }
 .brand-home:hover .brand-straw-hat,
 .brand-home:focus-visible .brand-straw-hat {
-  transform: translateY(-1px) rotate(-3deg);
+  transform: translateX(-50%) translateY(-2px) rotate(-3deg);
+}
+@keyframes brand-name-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@keyframes brand-hat-arrive {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-12px) rotate(-18deg) scale(.82);
+  }
+  68% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(1px) rotate(-5deg) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) rotate(-8deg) scale(1);
+  }
+}
+
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.25rem;
+  min-height: 44px;
+  padding-inline: .35rem;
+  border: 1px solid color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+  color: color-mix(in srgb, var(--primary-foreground) 66%, transparent);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .04em;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+.language-switch:hover {
+  border-color: var(--gold);
+  background: color-mix(in srgb, var(--primary-foreground) 7%, transparent);
+}
+.language-switch__option {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.45rem;
+  height: 2rem;
+}
+.language-switch__option.is-active {
+  color: var(--primary-foreground);
+  font-weight: 700;
+}
+.language-switch__option.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: .15rem;
+  left: 50%;
+  width: .8rem;
+  height: 2px;
+  background: var(--accent);
+  transform: translateX(-50%);
+}
+.language-switch__divider {
+  color: color-mix(in srgb, var(--primary-foreground) 32%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-wordmark,
+  .brand-straw-hat {
+    animation: none;
+  }
 }
 
 @media (max-width: 639px) {
