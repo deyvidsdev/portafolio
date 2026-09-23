@@ -40,13 +40,13 @@ const labels = es
       </dl>
     </article>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 items-start gap-5">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 items-stretch gap-5">
       {rest.map(project => {
         const text = project.content[lang];
         return (
-          <article aria-labelledby={`project-${project.id}`} class="border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)]">
+          <article aria-labelledby={`project-${project.id}`} class="flex min-h-[22rem] flex-col border-2 border-white/30 bg-[var(--background)] text-[var(--foreground)]">
             <div class="bg-[var(--accent)] text-[var(--accent-foreground)] px-5 py-3 font-display text-xl">{text.category}</div>
-            <div class="p-6">
+            <div class="flex-1 p-6">
               <span class="inline-block font-mono text-xs text-[var(--muted-foreground)] border border-[var(--border)] px-2 py-1 mb-4">{project.version}</span>
               <h3 id={`project-${project.id}`} class="font-display text-2xl mb-3">{text.name}</h3>
               <p class="font-sans text-sm leading-relaxed text-[var(--muted-foreground)]">{text.context}</p>
