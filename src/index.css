@@ -199,8 +199,36 @@ button:not(:disabled) { cursor: pointer; }
   display: inline-block;
   transform-origin: 50% 100%;
 }
-.brand-letter--accent {
-  color: var(--accent);
+.brand-dot {
+  position: relative;
+  display: inline-block;
+  width: .38em;
+  height: 1em;
+  flex: 0 0 .38em;
+}
+.brand-dot__core {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: .08em;
+  width: .28em;
+  height: .28em;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, white 42%, transparent);
+  background: #ff3b30;
+  box-shadow: 0 0 .28em rgba(255, 59, 48, .88);
+  transform-origin: 50% 100%;
+}
+.brand-dot-impact {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: .13em;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: 50% 50%;
 }
 .brand-letter-impact {
   position: absolute;
@@ -233,27 +261,27 @@ button:not(:disabled) { cursor: pointer; }
 .brand-straw-hat-positioner {
   position: absolute;
   z-index: 2;
-  top: -.62rem;
-  left: .35rem;
+  top: -.6rem;
+  left: .42rem;
   display: block;
-  transform: translateX(-50%) rotate(-18deg);
+  transform: translateX(-50%) rotate(-24deg);
   transform-origin: 48% 72%;
 }
 .brand-straw-hat {
   position: relative;
   display: block;
-  width: 2.45rem;
-  height: 1.65rem;
+  width: 2.05rem;
+  height: 1.52rem;
   transform-origin: 48% 72%;
   filter: drop-shadow(0 2px 0 color-mix(in srgb, #0e1520 28%, transparent));
 }
 .brand-straw-hat__crown {
   position: absolute;
   z-index: 2;
-  top: .02rem;
-  left: .66rem;
-  width: 1.12rem;
-  height: 1.06rem;
+  top: .01rem;
+  left: .5rem;
+  width: 1.08rem;
+  height: 1.12rem;
   overflow: hidden;
   border: 1.5px solid #a66f1f;
   border-radius: 58% 48% 18% 22% / 70% 67% 23% 20%;
@@ -276,10 +304,10 @@ button:not(:disabled) { cursor: pointer; }
 .brand-straw-hat__band {
   position: absolute;
   z-index: 3;
-  top: .73rem;
-  left: .54rem;
-  width: 1.3rem;
-  height: .31rem;
+  top: .76rem;
+  left: .39rem;
+  width: 1.27rem;
+  height: .28rem;
   border-block: 1px solid color-mix(in srgb, var(--accent) 68%, #1c1208);
   background: var(--accent);
   transform: rotate(-5deg) skewX(-12deg);
@@ -299,14 +327,14 @@ button:not(:disabled) { cursor: pointer; }
   z-index: 1;
   left: 0;
   bottom: .03rem;
-  width: 2.42rem;
-  height: .62rem;
+  width: 2.02rem;
+  height: .5rem;
   overflow: hidden;
   border: 1.5px solid #a66f1f;
   border-radius: 55% 45% 52% 48% / 48% 58% 42% 52%;
   background: #e8bd62;
   box-shadow: inset 0 -.12rem 0 color-mix(in srgb, #a66f1f 22%, transparent);
-  transform: skewX(-18deg) rotate(-4deg);
+  transform: skewX(-10deg) rotate(-4deg);
 }
 .brand-straw-hat__brim::after {
   content: '';
