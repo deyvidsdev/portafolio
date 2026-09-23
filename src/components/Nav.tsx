@@ -68,68 +68,80 @@ export default function Nav({ lang, links, alternateHref }: Props) {
     let active = true;
     let timeline: { revert: () => unknown } | undefined;
 
-    void import('animejs').then(({ createTimeline, stagger }) => {
+    void import('animejs').then(({ createTimeline, set, stagger }) => {
       if (!active) return;
       const letters = root.querySelectorAll<HTMLElement>('.brand-letter');
+      const letterImpacts = root.querySelectorAll<HTMLElement>('.brand-letter-impact');
       const hat = root.querySelector<HTMLElement>('.brand-straw-hat');
       const hakiBolts = root.querySelectorAll<HTMLElement>('.brand-haki__bolt');
-      if (!letters.length || !hat || !hakiBolts.length) return;
+      if (!letters.length || !letterImpacts.length || !hat || !hakiBolts.length) return;
+
+      set(letters, { opacity: 0, y: -58, scaleX: .42, scaleY: 1.65 });
+      set(letterImpacts, { opacity: 0, scaleX: .18, scaleY: .55 });
+      set(hakiBolts, { opacity: 0, scaleX: .04, scaleY: .45 });
+      set(hat, { opacity: 0, y: -36, scaleX: .96, scaleY: 1.04, rotate: -26 });
 
       timeline = createTimeline()
         .add(letters, {
           opacity: [0, 1],
-          x: [-14, 0],
-          scaleX: [.08, 1.72],
-          scaleY: [1.28, .68],
-          duration: 420,
-          delay: stagger(22),
-          ease: 'out(4)',
+          y: [-58, 4],
+          scaleX: [.42, 1.12],
+          scaleY: [1.65, .62],
+          duration: 390,
+          delay: stagger(58),
+          ease: 'in(2.4)',
         }, 0)
+        .add(letterImpacts, {
+          opacity: [0, 1, .12, 0],
+          scaleX: [.18, 1.35],
+          scaleY: [.55, 1.08],
+          duration: 340,
+          delay: stagger(58),
+          ease: 'outExpo',
+        }, 285)
         .add(letters, {
-          x: 3,
-          y: 2,
-          scaleX: .84,
-          scaleY: 1.18,
-          duration: 210,
-          delay: stagger(12),
-          ease: 'inOut(3)',
-        }, 500)
+          y: -7,
+          scaleX: .82,
+          scaleY: 1.32,
+          duration: 180,
+          delay: stagger(58),
+          ease: 'out(3)',
+        }, 360)
         .add(letters, {
-          x: 0,
           y: 0,
           scaleX: 1,
           scaleY: 1,
-          duration: 460,
-          delay: stagger(10),
-          ease: 'outElastic(.88, .3)',
-        }, 690)
+          duration: 480,
+          delay: stagger(58),
+          ease: 'outElastic(.88, .32)',
+        }, 500)
         .add(hat, {
           opacity: [0, 1],
-          y: [-28, 2],
-          scaleX: [.94, 1.08],
-          scaleY: [1.06, .95],
-          rotate: [-24, 1],
-          duration: 520,
-          ease: 'in(2.4)',
-        }, 250)
+          y: [-36, 2],
+          scaleX: [.96, 1.06],
+          scaleY: [1.04, .96],
+          rotate: [-26, 1],
+          duration: 410,
+          ease: 'in(2.5)',
+        }, 0)
         .add(hat, {
           y: 0,
           scaleX: 1,
           scaleY: 1,
           rotate: 0,
-          duration: 500,
-          ease: 'outElastic(.9, .34)',
-        }, 770)
+          duration: 470,
+          ease: 'outElastic(.9, .32)',
+        }, 405)
         .add(root, {
           x: [-5, 6],
           duration: 75,
           ease: 'linear',
-        }, 765)
+        }, 945)
         .add(root, {
           x: [6, 0],
           duration: 260,
           ease: 'outElastic(.8, .3)',
-        }, 840)
+        }, 1020)
         .add(hakiBolts, {
           opacity: [0, 1, .16, 1, 0],
           scaleX: [.04, 1.12],
@@ -137,7 +149,7 @@ export default function Nav({ lang, links, alternateHref }: Props) {
           duration: 760,
           delay: stagger(20, { from: 'center' }),
           ease: 'outExpo',
-        }, 745);
+        }, 925);
     });
 
     return () => {
@@ -169,6 +181,11 @@ export default function Nav({ lang, links, alternateHref }: Props) {
                 className={`brand-letter ${character === '.' ? 'brand-letter--accent' : ''}`}
               >
                 {character}
+                <span className="brand-letter-impact">
+                  <span className="brand-letter-impact__ray brand-letter-impact__ray--one" />
+                  <span className="brand-letter-impact__ray brand-letter-impact__ray--two" />
+                  <span className="brand-letter-impact__ray brand-letter-impact__ray--three" />
+                </span>
               </span>
             ))}
             <span className="brand-haki">
