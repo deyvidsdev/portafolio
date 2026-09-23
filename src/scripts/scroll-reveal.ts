@@ -14,9 +14,15 @@ export function setupScrollReveal() {
   }
 
   const observer = new IntersectionObserver(entries => {
+    const visibleEntries = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((first, second) => {
+        const firstRect = first.target.getBoundingClientRect();
+        const secondRect = second.target.getBoundingClientRect();
+        return firstRect.top - secondRect.top || firstRect.left - secondRect.left;
+      });
     let stagger = 0;
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
+    for (const entry of visibleEntries) {
       const element = entry.target as HTMLElement;
       observer.unobserve(element);
       if (seen.has(element)) continue;
@@ -25,15 +31,20 @@ export function setupScrollReveal() {
 
       // Preserve each block's own text opacity, and never leave an invisible fill state.
       const opacity = getComputedStyle(element).opacity;
-      const distance = window.innerWidth < 640 ? 14 : 24;
+      const distance = window.innerWidth < 640 ? 10 : 16;
+      const initialTransform = element.classList.contains('sr-fade')
+        ? 'translate3d(0, 0, 0)'
+        : element.classList.contains('sr-left')
+          ? `translate3d(-${distance}px, 0, 0)`
+          : `translate3d(0, ${distance}px, 0)`;
       try {
         const animation = element.animate([
-          { opacity: 0.08, transform: `translate3d(0, ${distance}px, 0)` },
+          { opacity: 0.28, transform: initialTransform },
           { opacity, transform: 'translate3d(0, 0, 0)' },
         ], {
-          duration: 600,
-          delay: Math.min(stagger++ * 70, 210),
-          easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
+          duration: 850,
+          delay: Math.min(stagger++ * 75, 225),
+          easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
           fill: 'backwards',
         });
         active.set(element, animation);
