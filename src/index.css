@@ -206,51 +206,92 @@ button:not(:disabled) { cursor: pointer; }
 .brand-straw-hat-positioner {
   position: absolute;
   z-index: 2;
-  top: -.68rem;
+  top: -.62rem;
   left: 50%;
   display: block;
   transform: translateX(-50%) rotate(-18deg);
-  transform-origin: 50% 70%;
+  transform-origin: 48% 72%;
 }
 .brand-straw-hat {
   position: relative;
   display: block;
-  width: 1.7rem;
-  height: 1.2rem;
-  transform-origin: 50% 70%;
+  width: 2.25rem;
+  height: 1.55rem;
+  transform-origin: 48% 72%;
   filter: drop-shadow(0 2px 0 color-mix(in srgb, #0e1520 28%, transparent));
 }
 .brand-straw-hat__crown {
   position: absolute;
   z-index: 2;
-  top: .06rem;
-  left: .43rem;
-  width: .88rem;
-  height: .78rem;
-  border: 2px solid var(--gold);
-  border-radius: 52% 52% 18% 18% / 72% 72% 20% 20%;
-  background: color-mix(in srgb, var(--gold) 72%, #f6e2a7);
+  top: .02rem;
+  left: .6rem;
+  width: 1.06rem;
+  height: 1rem;
+  overflow: hidden;
+  border: 1.5px solid #a66f1f;
+  border-radius: 58% 48% 18% 22% / 70% 67% 23% 20%;
+  background: #e8bd62;
+  box-shadow: inset -.16rem -.08rem 0 color-mix(in srgb, #a66f1f 24%, transparent);
+  transform: skewX(-7deg);
+}
+.brand-straw-hat__crown::after {
+  content: '';
+  position: absolute;
+  top: .25rem;
+  left: .23rem;
+  width: 1px;
+  height: .2rem;
+  background: #a66f1f;
+  opacity: .5;
+  transform: rotate(18deg);
+  box-shadow: .22rem .08rem 0 #a66f1f, .43rem -.06rem 0 #a66f1f, .6rem .18rem 0 #a66f1f;
 }
 .brand-straw-hat__band {
   position: absolute;
   z-index: 3;
-  top: .57rem;
-  left: .4rem;
-  width: .94rem;
-  height: .2rem;
-  border-block: 1px solid color-mix(in srgb, var(--accent) 74%, #1c1208);
+  top: .69rem;
+  left: .49rem;
+  width: 1.22rem;
+  height: .31rem;
+  border-block: 1px solid color-mix(in srgb, var(--accent) 68%, #1c1208);
   background: var(--accent);
+  transform: rotate(-5deg) skewX(-12deg);
+}
+.brand-straw-hat__band::after {
+  content: '';
+  position: absolute;
+  right: -.13rem;
+  bottom: -.04rem;
+  width: .25rem;
+  height: .22rem;
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 28%, 56% 100%, 10% 72%);
 }
 .brand-straw-hat__brim {
   position: absolute;
   z-index: 1;
-  left: .04rem;
-  bottom: .08rem;
-  width: 1.62rem;
-  height: .36rem;
-  border: 2px solid var(--gold);
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--gold) 78%, #f6e2a7);
+  left: 0;
+  bottom: .03rem;
+  width: 2.22rem;
+  height: .58rem;
+  overflow: hidden;
+  border: 1.5px solid #a66f1f;
+  border-radius: 55% 45% 52% 48% / 48% 58% 42% 52%;
+  background: #e8bd62;
+  box-shadow: inset 0 -.12rem 0 color-mix(in srgb, #a66f1f 22%, transparent);
+  transform: skewX(-18deg) rotate(-4deg);
+}
+.brand-straw-hat__brim::after {
+  content: '';
+  position: absolute;
+  top: .17rem;
+  left: .32rem;
+  width: .34rem;
+  height: 1px;
+  background: #a66f1f;
+  opacity: .48;
+  transform: rotate(-9deg);
+  box-shadow: .48rem .11rem 0 #a66f1f, .94rem -.02rem 0 #a66f1f, 1.35rem .12rem 0 #a66f1f;
 }
 .brand-aura {
   position: absolute;
